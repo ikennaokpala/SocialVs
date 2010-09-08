@@ -1,0 +1,30 @@
+<lift:surround with="default" at="content">
+    <!-- end #header-wrapper -->
+    <div id="page">
+        <div id="cont">
+
+            <div align="center" class="post">
+
+                <h2 class="title"><a href="#">View a Twitter User's Activity Summary Report.</a></h2>
+
+                <div class="entry">
+                    <lift:MainPage form="POST">
+                        <in:search/>
+                        <in:submit/>
+
+                    </lift:MainPage>
+                    <p>...</p>
+
+                    <h2>Profile Page</h2>
+                    <lift:TProfile/>
+                </div>
+            </div>
+
+        </div>
+        <!-- end #content -->
+
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+    <!-- end #page -->
+
+</lift:surround>
