@@ -1,4 +1,4 @@
-package rootsocial.snippet
+package schoolprojectnov2010.snippet
 
 class TProfile extends ApplicationUser {
 

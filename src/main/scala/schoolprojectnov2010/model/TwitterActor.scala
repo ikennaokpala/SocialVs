@@ -1,4 +1,4 @@
-package rootsocial.model
+package schoolprojectnov2010.model
 
 import net.liftweb.actor._
 

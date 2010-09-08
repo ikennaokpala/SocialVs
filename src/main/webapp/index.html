@@ -1,8 +1,26 @@
 <lift:surround with="default" at="content">
-    <lift:TwitterOAuth>
-        <img src="/classpath/images/twitter_button_1_hi.gif"
-             alt="Twitter OAuth Button"/>
-    </lift:TwitterOAuth>
+    <!-- end #header-wrapper -->
+    <div id="page">
+        <div id="cont">
+
+            <div align="center" class="post">
+
+                <h2 class="title"><a href="#">View a Twitter User's Activity Summary Report.</a></h2>
+
+                <div class="entry">
+                    <lift:MainPage form="POST">
+                        <in:search/>
+                        <in:submit/>
+
+                    </lift:MainPage>
+                    <p>...</p>
+                </div>
+            </div>
+        </div>
+        <!-- end #content -->
+
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+    <!-- end #page -->
 
 </lift:surround>
-                      

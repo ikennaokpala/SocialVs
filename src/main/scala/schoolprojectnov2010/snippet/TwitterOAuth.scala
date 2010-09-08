@@ -1,9 +1,8 @@
-package rootsocial.snippet
+package schoolprojectnov2010.snippet
 
 import net.liftweb.http._
-
 class TwitterOAuth extends ApplicationUser {
-  import scala.xml.{NodeSeq}
+  import scala.xml.NodeSeq
   import SHtml._
   import js._
   import JsCmds.{Noop, RedirectTo}
@@ -13,7 +12,6 @@ class TwitterOAuth extends ApplicationUser {
        if (user.authorized) {
           userLoggedIn
         } else {
-
       // if user isnt logged in, then check for OAuth params on URL
       (for{
         tkn <- S.param("oauth_token")
@@ -46,15 +44,13 @@ class TwitterOAuth extends ApplicationUser {
 
         user.authorized = true
         user.screenName = username
+        S.redirectTo("/"+username)
         userLoggedIn
 
-      case _ =>
-
-        <b>something aint right</b>
+      case _ =>     <b>something aint right</b>
     }
   }
 
-  def userLoggedIn = <div>
-    {user.screenName}
-    logged in!</div>
+  def userLoggedIn = <span><li >  <a href={user.screenName} >
+    {user.screenName}  </a></li>  <li >  <a href="logout" class="last" >Log Out</a> </li></span>
 }
