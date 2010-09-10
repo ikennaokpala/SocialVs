@@ -44,7 +44,7 @@ class Boot {
 
     // Defining allowed resource folders located in the resources source folder
     ResourceServer.allow {
-      case "jquery.js" :: Nil => true
+//      case "jquery.js" :: Nil => true
       case "css" :: _ => true
       case "script" :: _ => true
       case "images" :: _ => true
