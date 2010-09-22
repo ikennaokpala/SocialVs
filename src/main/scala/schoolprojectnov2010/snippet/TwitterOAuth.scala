@@ -1,4 +1,6 @@
-package schoolprojectnov2010.snippet
+package schoolprojectnov2010{
+package snippet{
+
 
 import net.liftweb.http._
 class TwitterOAuth extends ApplicationUser {
@@ -54,4 +56,6 @@ class TwitterOAuth extends ApplicationUser {
 
   def userLoggedIn = <span><li >  <a href={user.screenName} >
     {user.screenName}  </a></li>  <li >  <a href="logout" class="last" >Log Out</a> </li></span>
+}
+}
 }

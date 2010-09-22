@@ -12,14 +12,18 @@ import _root_.net.liftweb.util._
 import Helpers._
 import xml.NodeSeq
 import net.liftweb._
-import http.SHtml
+import http.{S, SHtml}
 
-class MainPage {
+
+class SharedSnippet {
+  var search = ""
+
   def render(xhtml: NodeSeq): NodeSeq = {
-    var search = ""
-    val submitLabel = "Get Report"
-    bind("in", xhtml,
+
+  bind("in", xhtml,
       "search" -> SHtml.text(search, search = _),
-      "submit" -> SHtml.submit(submitLabel, () => {}, "id" -> "btn"))
+      "submit" -> SHtml.submit(S.?("Get Report"), () => {}, "id" -> "btn"))
   }
+
+
 }
