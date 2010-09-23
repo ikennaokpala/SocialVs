@@ -39,7 +39,6 @@ class TwitterOAuth extends ApplicationUser {
 
   // if URL has tokens, then complete OAuth process
   def useTokens(token: String, verifier: String): NodeSeq = {
-    println("USETOKENS  HAS BEEN CALLED ")
 
     user.twitterVerifyAuth(verifier) match {
 
