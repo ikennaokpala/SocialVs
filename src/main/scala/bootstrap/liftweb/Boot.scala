@@ -3,8 +3,6 @@ package bootstrap.liftweb
 import _root_.net.liftweb.sitemap._
 import Loc._
 import net.liftweb.http._
-import schoolprojectnov2010.snippet.UserSession
-
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -33,15 +31,16 @@ class Boot {
         //Logout and Redirecto home page(/)
         LiftRules.dispatch.append {
             case Req("logout" :: Nil, _, GetRequest) => S.request.foreach(_.request.session.terminate)
-//            UserSession.is.
+            //            UserSession.is.
             S.redirectTo("/")
         }
 
         // rewrite rules for urls like rs.com/twitter-screen-name
         LiftRules.statefulRewrite.append {
             case RewriteRequest(ParsePath(screenName :: Nil, _, _, _), _, _)
-                if isScreenNameValid(screenName) && UserSession.is.nonEmpty =>
+                if isScreenNameValid(screenName) =>
                 RewriteResponse("profile" :: "index" :: Nil, Map("screenName" -> screenName))
+
         }
 
         // Defining allowed resource folders located in the resources source folder

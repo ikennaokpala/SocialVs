@@ -6,7 +6,7 @@ import json._
 //import JsonHttp._
 import oauth.{Consumer, Token}
 import twitter._
-import net.liftweb.http.S
+import net.liftweb.http.{S}
 
 trait ExtUserProps extends UserProps with Js {
     val friends_count = 'friends_count ! num
@@ -55,36 +55,17 @@ class TwitterActor extends LiftActor {
 
             try {
 
-                /*val statuses: List[dispatch.json.JsObject] = http(Status(screenName).timeline)
-                var twt: List[Any] = List()
-
-                statuses foreach {
-                    js =>
-                        val Status.user.screen_name(screen_name) = js
-                        val Status.text(text) = js
-                        val Status.user.followers_count(followers_count) = js
-                        val profileURLExtractor = new Obj('user) with MyUserProps
-                        //	val MyUserProps.profile_image_url(profile_image_url) = js
-                        //	println(profile_image_url)
-                        val twt1 = <p>
-                            {"%-15s%-15s%s" format (screen_name, followers_count, Status.rebracket(text))}
-                        </p>
-
-                        twt = twt ++ twt1
-                        twt
-                }*/
                 val twt = for{
-                    item <- http(Status(screenName).timeline)
-                    Status.user(user) = item
-                    //                    ExtUser.screen_name(screen_name) = item
-                    friend_count = ExtUser.friends_count(user)
+                    twtJsonList <- http(Status(screenName).timeline)
+                    Status.user.screen_name(screen_name) = twtJsonList
+                    Status.text(text) = twtJsonList
+                    Status.user.followers_count(followers_count) = twtJsonList
+                    Status.user(user) = twtJsonList
+                    friends_count = ExtUser.friends_count(user)
                     profile_image_url = ExtUser.profile_image_url(user)
-                } yield <img src={profile_image_url}/>
-                //                yield <p>{"%-15s%-15s%s" format (screen_name, msg, friend_count)}</p>
+                } yield (screen_name, text, friends_count, followers_count, profile_image_url)
 
-                println(twt)
-
-
+                //                                println(twt)
                 reply(twt)
             } catch {
 
