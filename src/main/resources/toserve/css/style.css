@@ -4,7 +4,6 @@ http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
 
-
 body {
     margin: 0;
     padding: 0;
@@ -113,8 +112,8 @@ hr {
 }
 
 #wrapper {
-    /*background: url(/classpath/images/img02.jpg) repeat-y center top;*/
-      background:  repeat-y center top;
+/*background: url(/classpath/images/img02.jpg) repeat-y center top;*/
+    background: repeat-y center top;
 }
 
 #wrapper-bgtop {
@@ -137,7 +136,8 @@ hr {
 
 #menu {
     float: right;
-    width: 500px;
+    width: 550px;
+    margin-right: 10px;
 }
 
 #menu ul {
@@ -146,6 +146,11 @@ hr {
     padding: 50px 0px 0px 0px;
     list-style: none;
     line-height: normal;
+}
+
+#menu ul img {
+    margin: -6px 0 0 10px;
+
 }
 
 #menu li {
@@ -178,8 +183,6 @@ hr {
 
     border-right: none;
 }
-
-
 
 /* Search */
 
@@ -286,6 +289,35 @@ hr {
     width: 600px;
 }
 
+#twu {
+    color: #a9a9a9;
+}
+
+#smallbox {
+/*padding: 0.15em;*/
+    /*float: right;*/
+    width: 14em;
+    height: 24px;
+    border: 3px solid #ddd;
+    background: #fafafa;
+    font: bold 1.0em arial, sans-serif;
+    -moz-border-radius: 0.4em;
+    -khtml-border-radius: 0.4em;
+
+}
+
+#smallboxbtn {
+    background-color: #360;
+    color: white;
+    width: 40px;
+    height: 29px;
+}
+
+#stxt {
+    margin-top: -25px;
+    float: right;
+}
+
 /* Post */
 
 .post {
@@ -327,6 +359,16 @@ hr {
 
 .post .entry {
     padding: 10px 15px;
+}
+
+.post .entry p {
+    margin: 30px 0 0 1px;
+    text-align: center;
+    line-height: normal;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bolder;
+    color: gray;
 }
 
 .post .entry form {
@@ -503,4 +545,115 @@ hr {
 
 #footer a {
     color: #FFFFFF;
+}
+
+#belowfooter {
+    width: 980px;
+    height: 98px;
+    margin: 0 auto;
+
+}
+
+#belowfooter a {
+
+    font-size: 4.6em;
+    color: black;
+}
+
+#image {
+    padding: 0 0 0 1px;
+    width: 200px;
+    height: 80px;
+
+}
+
+/**
+ styling for tabs begin below
+
+*/
+
+.container {
+    width: 920px; /*margin: 2px auto;*/
+}
+
+ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    width: 100%;
+}
+
+ul.tabs li {
+    float: left;
+    margin: 0;
+    padding: 0;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #999;
+    border-left: none;
+    margin-bottom: -1px;
+    background: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+}
+
+ul.tabs li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    font-size: 1.2em;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    outline: none;
+}
+
+ul.tabs li a:hover {
+    background: #ccc;
+}
+
+html ul.tabs li.active, html ul.tabs li.active a:hover {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.tab_container {
+    border: 1px solid #999;
+    border-top: none;
+    clear: both;
+    float: left;
+    width: 100%;
+    background: #fff;
+    -moz-border-radius-bottomright: 5px;
+    -khtml-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -khtml-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+}
+
+.tab_content {
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+.tab_content h2 {
+    font-weight: normal;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+    font-size: 1.8em;
+}
+
+.tab_content h3 a {
+    color: #254588;
+}
+
+.tab_content img {
+    float: left;
+    margin: 0 20px 20px 0;
+    border: 1px solid #ddd;
+    padding: 5px;
 }

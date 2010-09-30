@@ -50,7 +50,7 @@ class Boot {
             case "script" :: _ => true
             case "images" :: _ => true
             case "docs" :: _ => true
-            case "media" :: _ => true
+            case "js" :: _ => true
         }
 
         //page error handling

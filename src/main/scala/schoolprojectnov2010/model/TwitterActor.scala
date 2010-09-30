@@ -6,11 +6,19 @@ import json._
 //import JsonHttp._
 import oauth.{Consumer, Token}
 import twitter._
-import net.liftweb.http.{S}
+import net.liftweb.http.S
 
 trait ExtUserProps extends UserProps with Js {
+    val id = 'id ! num
+    val listed_count = 'listed_count ! num
+    val favourites_count = 'favourites_count ! num
+    val url = 'url ! str
     val friends_count = 'friends_count ! num
     val profile_image_url = 'profile_image_url ! str
+    val name = 'name ! str
+    val description = 'description ! str
+    val location = 'location ! str
+    val statuses_count = 'statuses_count ! num
 }
 object ExtUser extends ExtUserProps with Js
 
@@ -24,6 +32,11 @@ case object AuthURL
 case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
 case class Mentions(screenName: String)
+case class TwitterUserInfoStream(id: BigDecimal, name: String, screenName: String,
+                                 description: String, text: String, statuses_count: BigDecimal,
+                                 friends_count: BigDecimal, followers_count: BigDecimal,
+                                 listed_count: BigDecimal, favourites_count: BigDecimal,
+                                 url: String, location: String, profile_image_url: String)
 
 class TwitterActor extends LiftActor {
     val http = new Http
@@ -55,17 +68,35 @@ class TwitterActor extends LiftActor {
 
             try {
 
-                val twt = for{
-                    twtJsonList <- http(Status(screenName).timeline)
-                    Status.user.screen_name(screen_name) = twtJsonList
-                    Status.text(text) = twtJsonList
-                    Status.user.followers_count(followers_count) = twtJsonList
-                    Status.user(user) = twtJsonList
-                    friends_count = ExtUser.friends_count(user)
-                    profile_image_url = ExtUser.profile_image_url(user)
-                } yield (screen_name, text, friends_count, followers_count, profile_image_url)
+                val twt = {
 
-                //                                println(twt)
+                    val twt1 = for{
+                        twtJsonList <- http(Status(screenName).timeline)
+                        Status.user.screen_name(screen_name) = twtJsonList
+                        Status.text(text) = twtJsonList
+                        Status.user.followers_count(followers_count) = twtJsonList
+                        Status.user(user) = twtJsonList
+                        id = ExtUser.id(user)
+                        statuses_count = ExtUser.statuses_count(user)
+                        friends_count = ExtUser.friends_count(user)
+                        listed_count = ExtUser.listed_count(user)
+                        favourites_count = ExtUser.favourites_count(user)
+                        url = ExtUser.url(user)
+                        profile_image_url = ExtUser.profile_image_url(user)
+                        name = ExtUser.name(user)
+                        location = ExtUser.location(user)
+                        description = ExtUser.description(user)
+
+                    } yield new TwitterUserInfoStream(id, name, screenName,
+                            description, text, statuses_count, friends_count,
+                            followers_count, listed_count, favourites_count,
+                            url, location, profile_image_url)
+
+                    twt1
+
+
+                }
+                //        println(twt.asInstanceOf[List[TwitterUserInfoStream]])
                 reply(twt)
             } catch {
 

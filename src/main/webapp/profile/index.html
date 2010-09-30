@@ -3,17 +3,135 @@
     <div id="page">
         <div id="cont">
 
-            <div align="center" class="post">
+            <lift:TProfile>
+                <div class="container">
+                    <h2 id="twu">Twitter User:
+                        <p:name/>
+                    </h2>
+                    <p id="stxt">
+                     <lift:SharedSnippet.smallSearchBox form="GET"¤>
+                        <ss:search/>
+                        <ss:submit/>
 
-                <h2 class="title"><a href="#">View a Twitter User's Activity Summary Report.</a></h2>
+                    </lift:SharedSnippet.smallSearchBox>
+                    </p>
 
-                <div class="entry">
+                    <ul class="tabs">
+                        <li><a href="#tab1">Influence Summary </a></li>
+                        <li><a href="#tab2">Visual Analysis</a></li>
+                        <li><a href="#tab3">Volume Analysis</a></li>
+                        <!--<li><a href="#tab4">Next thing goes right here</a></li>-->
+                    </ul>
+                    <div class="tab_container">
+                        <div id="tab1" class="tab_content">
+                            <h2>
+                                <p:screen_name_anchor/>
+                            </h2>
+
+                            <a href="#">
+                                <p:profile_picture/>
+                            </a>
+
+                            <p>
+                               <b>Bio:</b> <p:description/>
+                                <br/>
+                               <b>Location: <p:location/>, Website:  <p:url/>
+                                <br/>
+                                   Tweets: <p:statuses_count />,
+                              Following:  <p:friends_count/>,
+
+                                Followers:<p:followers_count/>,
+                                   Favourites : <p:favourites_count/>,
+                                   Listed: <p:listed_count/>
+                               </b>
 
 
-                    <h2>Tweets from this User</h2>
-                    <lift:TProfile/>
+                            </p>
+                            <h3>Tweets by @
+                                <p:screen_name/>
+                            </h3>
+                            <p></p>
+
+                            <p>
+                            <ul>
+                                <p:text/>
+                            </ul>
+                            </p>
+
+
+                            <p></p>
+                        </div>
+                        <div id="tab2" class="tab_content">
+                            <h2>
+                                <p:screen_name_anchor/>
+                            </h2>
+
+                            <a href="#">
+                                <p:profile_picture/>
+                            </a>
+
+                            <p>
+                                <p:description/>
+                            </p>
+                            <h3>Tweets by @
+                                <p:screen_name/>
+                            </h3>
+                            <p></p>
+
+                            <p>
+                            <ul>
+                                <p:text/>
+                            </ul>
+                            </p>
+
+
+                            <p></p>
+                        </div>
+                        <div id="tab3" class="tab_content">
+
+                            <h2>
+                                <p:screen_name_anchor/>
+                            </h2>
+
+                            <a href="#">
+                                <p:profile_picture/>
+                            </a>
+
+                            <p>
+                                <p:description/>
+                            </p>
+                            <h3>Tweets by @
+                                <p:screen_name/>
+                            </h3>
+                            <p></p>
+
+                            <p>
+                            <ul>
+                                <p:text/>
+                            </ul>
+                            </p>
+
+
+                            <p></p>
+                        </div>
+                        <div id="tab4" class="tab_content">
+                            <h2>Next thing goes right here</h2>
+                            <a href="#"> <img src="#" alt=""/></a>
+
+                            <h3><a href="#"></a></h3>
+
+                            <p></p>
+
+                            <p></p>
+
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div style="clear: both; display: block; padding: 10px 0; text-align:center;">
+                </div>
+            </lift:TProfile>
+
 
         </div>
         <!-- end #content -->
@@ -21,5 +139,6 @@
         <div style="clear: both;">&nbsp;</div>
     </div>
     <!-- end #page -->
+
 
 </lift:surround>
