@@ -13,10 +13,6 @@ import Helpers._
 import xml.NodeSeq
 import net.liftweb._
 import http.{S, SHtml}
-import schoolprojectnov2010.model.Tweeter
-
-
-
 class SharedSnippet {
     var search = ""
 
@@ -31,7 +27,7 @@ class SharedSnippet {
 
         bind("ss", xhtml,
             "search" -> SHtml.text(search, search = _, "id" -> "smallbox"),
-            "submit" -> SHtml.submit(S.?("Go"), () => {}, "id" -> "smallboxbtn"))
+            "submit" -> SHtml.submit(S.?("Go"), () => S.redirectTo("/"+search), "id" -> "smallboxbtn"))
 
     }
 

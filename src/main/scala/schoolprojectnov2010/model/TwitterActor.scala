@@ -3,7 +3,7 @@ package schoolprojectnov2010.model
 import net.liftweb.actor._
 import dispatch._
 import json._
-//import JsonHttp._
+import json.JsHttp._
 import oauth.{Consumer, Token}
 import twitter._
 import net.liftweb.http.S
@@ -40,6 +40,9 @@ case class TwitterUserInfoStream(id: BigDecimal, name: String, screenName: Strin
 
 class TwitterActor extends LiftActor {
     val http = new Http
+    val topic = ""
+    val topicString= "search.json?key=n6aahpgj7geqespvdvsbuk7u&topic="+topic
+    val req = :/("api.klout.com")/"1"/"topics"/topicString
     var request_token: Option[Token] = None
     var access_token: Option[Token] = None
     val httpHost = S.hostAndPath
@@ -72,6 +75,7 @@ class TwitterActor extends LiftActor {
 
                     val twt1 = for{
                         twtJsonList <- http(Status(screenName).timeline)
+                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
                         Status.user.screen_name(screen_name) = twtJsonList
                         Status.text(text) = twtJsonList
                         Status.user.followers_count(followers_count) = twtJsonList
