@@ -13,3 +13,4 @@ src_managed
 *.ipr
 *.iws
 *~
+profiles.xml
