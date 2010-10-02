@@ -8,7 +8,6 @@ project/boot
 project/plugins/project
 project/build/target
 src_managed
-~/Projects/SchoolProjectNov2010/profiles.xml
 *.cfg
 *.iml
 *.ipr
