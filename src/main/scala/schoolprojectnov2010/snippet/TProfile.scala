@@ -1,10 +1,12 @@
 package schoolprojectnov2010.snippet
 
-import net.liftweb.http.S
-import schoolprojectnov2010.model.TwitterUserInfoStream
-import net.liftweb.util._
+import net.liftweb._
+import util._
 import Helpers._
+import http.S
+
 import scala.xml.{NodeSeq, Elem}
+import schoolprojectnov2010.model.TwitterUserInfoStream
 
 
 class TProfile extends ApplicationUser {
@@ -17,7 +19,7 @@ class TProfile extends ApplicationUser {
                         userStream(screenName)
                     ) getOrElse noTweets
             if (tprofile.isInstanceOf[Elem]) {
-                noTweets
+                tprofile.asInstanceOf[Elem]
             } else {
 
                 val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserInfoStream]]
@@ -26,10 +28,10 @@ class TProfile extends ApplicationUser {
                     {n.text}
                 </li>)
 
+                def doBind(xhtml: NodeSeq) = {
 
-                def doBind(xhtml: NodeSeq) =
                     bind("p", xhtml,
-                        "name" -> TwtUserInfo.name,
+                        "name" -> TwtUserInfo.name.toString,
                         "description" -> TwtUserInfo.description,
                         "screen_name" -> TwtUserInfo.screenName,
                         "screen_name_anchor" -> <a>@
@@ -39,20 +41,22 @@ class TProfile extends ApplicationUser {
                         "favourites_count" -> TwtUserInfo.favourites_count.toString,
                         "listed_count" -> TwtUserInfo.listed_count.toString,
                         "text" -> text,
-                        "location" -> TwtUserInfo.location,
+                        "location" -> TwtUserInfo.location.toString,
                         "statuses_count" -> TwtUserInfo.statuses_count.toString,
                         "followers_count" -> TwtUserInfo.followers_count.toString,
                         "friends_count" -> TwtUserInfo.friends_count.toString,
                         "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>
 
     )
-
-    doBind(xhtml)
 }
 
+doBind (xhtml)
+}
 } else {
 notAuthorised
 }
+
+
 
 def userStream (screen_name: String) = {
 val userInfoList = user.tweetsForName (screen_name)
@@ -67,9 +71,11 @@ no tweets here
 }
 
 def notAuthorised: NodeSeq = {
-<center> <h2>
+<center>
+<h2>
 You need to login to used this application
-</h2> </center>
+</h2>
+</center>
 }
 
 

@@ -1,60 +1,68 @@
-package schoolprojectnov2010{
-package snippet{
+package schoolprojectnov2010 {
+package snippet {
 
 
 import net.liftweb.http._
+
 class TwitterOAuth extends ApplicationUser {
-  import scala.xml.NodeSeq
-  import SHtml._
-  import js._
-  import JsCmds.{Noop, RedirectTo}
+    import scala.xml.NodeSeq
+    import SHtml._
+    import js._
+    import JsCmds.{Noop, RedirectTo}
 
     def render(xhtml: NodeSeq) = {
-    // if user is already logged in, dont show OAuth button
-       if (user.authorized) {
-          userLoggedIn
+        // if user is already logged in, dont show OAuth button
+        if (user.authorized) {
+            userLoggedIn
         } else {
-      // if user isnt logged in, then check for OAuth params on URL
-      (for{
-        tkn <- S.param("oauth_token")
-        vrfr <- S.param("oauth_verifier")
-      } yield useTokens(tkn, vrfr)) getOrElse span(xhtml, twitterAuthURL)
+            // if user isnt logged in, then check for OAuth params on URL
+            (for{
+                tkn <- S.param("oauth_token")
+                vrfr <- S.param("oauth_verifier")
+            } yield useTokens(tkn, vrfr)) getOrElse span(xhtml, twitterAuthURL)
+        }
     }
-  }
 
-  // try to generate URL for Twitter Auth requests
-  def twitterAuthURL: JsCmd = {
+    // try to generate URL for Twitter Auth requests
+    def twitterAuthURL: JsCmd = {
 
-    user.twitterAuthURL match {
+        user.twitterAuthURL match {
 
-      case (Some(url: String)) =>
+            case (Some(url: String)) =>
 
-        RedirectTo(url)
+                RedirectTo(url)
 
-      case _ =>
+            case _ =>
 
-        Noop
+                Noop
+        }
     }
-  }
 
-  // if URL has tokens, then complete OAuth process
-  def useTokens(token: String, verifier: String): NodeSeq = {
+    // if URL has tokens, then complete OAuth process
+    def useTokens(token: String, verifier: String): NodeSeq = {
 
-    user.twitterVerifyAuth(verifier) match {
+        user.twitterVerifyAuth(verifier) match {
 
-      case Some(username: String) =>
+            case Some(username: String) =>
 
-        user.authorized = true
-        user.screenName = username
-        S.redirectTo("/"+username)
-        userLoggedIn
+                user.authorized = true
+                user.screenName = username
+                S.redirectTo("/" + username)
+                userLoggedIn
 
-      case _ =>     <b>something aint right</b>
+            case _ => <b>something aint right</b>
+        }
     }
-  }
 
-  def userLoggedIn = <span><li >  <a href={user.screenName} >
-    {user.screenName}  </a></li>  <li >  <a href="logout" class="last" >Log Out</a> </li></span>
+    def userLoggedIn = <span>
+        <li>
+            <a href={user.screenName}>
+                {user.screenName}
+            </a>
+        </li> <li>
+            <a href="logout" class="last">Log Out</a>
+        </li>
+    </span>
 }
 }
 }

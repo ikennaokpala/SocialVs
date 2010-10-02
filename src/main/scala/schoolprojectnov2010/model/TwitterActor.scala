@@ -75,7 +75,7 @@ class TwitterActor extends LiftActor {
 
                     val twt1 = for{
                         twtJsonList <- http(Status(screenName).timeline)
-                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
+//                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
                         Status.user.screen_name(screen_name) = twtJsonList
                         Status.text(text) = twtJsonList
                         Status.user.followers_count(followers_count) = twtJsonList
