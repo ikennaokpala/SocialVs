@@ -11,7 +11,7 @@ class SchoolProjectNov2010(info: ProjectInfo) extends DefaultWebProject(info) wi
     // Lift
     val snapshots = ScalaToolsSnapshots
     // Libraries
-    val liftDep = "net.liftweb" %% "lift-mapper" % "2.1-SNAPSHOT" % "compile"
+    val liftDep = "net.liftweb" %% "lift-mapper" % "2.1" % "compile"
     val jetty6Dep = "org.mortbay.jetty" % "jetty" % "6.1.14" % "test"
     val servletDep = "javax.servlet" % "servlet-api" % "2.5" % "provided"
     val junitDep = "junit" % "junit" % "3.8.1" % "test"
