@@ -52,9 +52,10 @@ class TProfile extends ApplicationUser {
     }
 
 
-  def userStream(screen_name: String) =
-  val userInfoList = user.tweetsForName(screen_name)
-  userInfoList
+  def userStream(screen_name: String) = {
+    val userInfoList = user.tweetsForName(screen_name)
+    userInfoList
+  }
 
 
   def noTweets: NodeSeq = <div>no tweets here</div>
