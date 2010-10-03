@@ -5,7 +5,7 @@ import util._
 import Helpers._
 import http.S
 
-import scala.xml.{NodeSeq}
+import scala.xml.{NodeSeq, Elem}
 import schoolprojectnov2010.model.TwitterUserVO
 
 
@@ -14,12 +14,9 @@ class TProfile extends ApplicationUser {
     user.authorized match {
       case true => val tprofile = (for{
         screenName <- S.param("screenName")
-      } yield
-        userStream(screenName)
-              ) getOrElse noTweets
-
+      } yield userStream(screenName))getOrElse noTweets
       tprofile match {
-        case e: NodeSeq => tprofile.asInstanceOf[NodeSeq]
+        case e: Elem => tprofile.asInstanceOf[NodeSeq]
         case x :: rest => val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserVO]]
         val TwtUserInfo = TwtInfoList(0)
         val text = TwtInfoList map (n => <li>
@@ -27,7 +24,6 @@ class TProfile extends ApplicationUser {
         </li>)
 
         def doBind(xhtml: NodeSeq) = {
-
           bind("p", xhtml,
             "name" -> TwtUserInfo.name.toString,
             "description" -> TwtUserInfo.description,
@@ -45,21 +41,17 @@ class TProfile extends ApplicationUser {
             "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>,
             "friends_count" -> TwtUserInfo.friends_count.toString)
         }
-
         doBind(xhtml)
       }
       case false => notAuthorised
     }
-
 
   def userStream(screen_name: String) = {
     val userInfoList = user.tweetsForName(screen_name)
     userInfoList
   }
 
-
   def noTweets: NodeSeq = <div>no tweets here</div>
-
 
   def notAuthorised: NodeSeq = <center>
     <h2>You need to login to used this application</h2>
