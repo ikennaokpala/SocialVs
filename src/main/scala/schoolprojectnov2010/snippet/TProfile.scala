@@ -5,7 +5,7 @@ import util._
 import Helpers._
 import http.S
 
-import scala.xml.{NodeSeq, Elem}
+import scala.xml.{NodeSeq}
 import schoolprojectnov2010.model.TwitterUserInfo
 
 
@@ -19,7 +19,7 @@ class TProfile extends ApplicationUser {
               ) getOrElse noTweets
 
       tprofile match {
-        case e: Elem => tprofile.asInstanceOf[Elem]
+        case e: NodeSeq => tprofile.asInstanceOf[NodeSeq]
         case x :: rest => val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserInfo]]
         val TwtUserInfo = TwtInfoList(0)
         val text = TwtInfoList map (n => <li>
@@ -52,10 +52,9 @@ class TProfile extends ApplicationUser {
     }
 
 
-  def userStream(screen_name: String) = {
-    val userInfoList = user.tweetsForName(screen_name)
-    userInfoList
-  }
+  def userStream(screen_name: String) =
+  val userInfoList = user.tweetsForName(screen_name)
+  userInfoList
 
 
   def noTweets: NodeSeq = <div>no tweets here</div>
