@@ -32,7 +32,7 @@ case object AuthURL
 case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
 case class Mentions(screenName: String)
-case class TwitterUserInfoStream(id: BigDecimal, name: String, screenName: String,
+case class TwitterUserInfo(id: BigDecimal, name: String, screenName: String,
                                  description: String, text: String, statuses_count: BigDecimal,
                                  friends_count: BigDecimal, followers_count: BigDecimal,
                                  listed_count: BigDecimal, favourites_count: BigDecimal,
@@ -91,7 +91,7 @@ class TwitterActor extends LiftActor {
                         location = ExtUser.location(user)
                         description = ExtUser.description(user)
 
-                    } yield new TwitterUserInfoStream(id, name, screenName,
+                    } yield new TwitterUserInfo(id, name, screenName,
                             description, text, statuses_count, friends_count,
                             followers_count, listed_count, favourites_count,
                             url, location, profile_image_url)
@@ -100,7 +100,7 @@ class TwitterActor extends LiftActor {
 
 
                 }
-                //        println(twt.asInstanceOf[List[TwitterUserInfoStream]])
+                //        println(twt.asInstanceOf[List[TwitterUserInfo]])
                 reply(twt)
             } catch {
 

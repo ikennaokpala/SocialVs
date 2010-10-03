@@ -6,7 +6,7 @@ import Helpers._
 import http.S
 
 import scala.xml.{NodeSeq, Elem}
-import schoolprojectnov2010.model.TwitterUserInfoStream
+import schoolprojectnov2010.model.TwitterUserInfo
 
 
 class TProfile extends ApplicationUser {
@@ -20,7 +20,7 @@ class TProfile extends ApplicationUser {
 
       tprofile match {
         case e: Elem => tprofile.asInstanceOf[Elem]
-        case x :: rest => val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserInfoStream]]
+        case x :: rest => val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserInfo]]
         val TwtUserInfo = TwtInfoList(0)
         val text = TwtInfoList map (n => <li>
           {n.text}
