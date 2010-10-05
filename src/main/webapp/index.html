@@ -5,12 +5,14 @@
 
             <div align="center" class="post">
 
-                <h2 class="title"><a href="#">Search for  keywords or #hashtags.</a></h2>
+                <h2 class="title"><a href="#">Find influencers by topic, keywords or #hashtags. </a></h2>
 
                 <div class="entry">
-                    <lift:SharedSnippet form="GET">
-                        <ss:search/>
-                        <ss:submit/>
+                    <lift:SharedSnippet form="POST">
+                        <p id="srch">
+                            <ss:search/>
+                            <ss:submit/>
+                        </p>
 
                     </lift:SharedSnippet>
                     <p>To view volume and/or Influence rating. login with your twitter account.</p>

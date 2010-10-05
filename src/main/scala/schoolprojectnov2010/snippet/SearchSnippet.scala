@@ -1,7 +1,9 @@
 package schoolprojectnov2010.snippet
 
 import xml.NodeSeq
-import net.liftweb.util.Helpers._
+import net.liftweb._
+import util.Helpers._
+import http._
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,8 +15,11 @@ import net.liftweb.util.Helpers._
 
 class SearchSnippet {
     def render(xhtml: NodeSeq): NodeSeq =
-        bind("sn", xhtml,
-            "searchtest" -> Influencer.is.toString)
+//        if (searchObj.is.isEmpty)
+//            S.redirectTo("/")
+//        else
+            bind("sn", xhtml,
+                "searchtest" -> Influencer.is.toString)
 
 
 }

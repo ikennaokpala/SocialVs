@@ -9,11 +9,11 @@
                         <p:name/>
                     </h2>
                     <p id="stxt">
-                     <lift:SharedSnippet.smallSearchBox form="GET">
-                        <ss:search/>
-                        <ss:submit/>
+                        <lift:SharedSnippet.smallSearchBox form="POST">
+                            <ss:search/>
+                            <ss:submit/>
 
-                    </lift:SharedSnippet.smallSearchBox>
+                        </lift:SharedSnippet.smallSearchBox>
                     </p>
 
                     <ul class="tabs">
@@ -33,17 +33,30 @@
                             </a>
 
                             <p>
-                               <b>Bio:</b> <p:description/>
+                                <b>Bio:</b>
+                                <p:description/>
                                 <br/>
-                               <b>Location: <p:location/>, Website:  <p:url/>
-                                <br/>
-                                   Tweets: <p:statuses_count />,
-                              Following:  <p:friends_count/>,
+                                <b>Location:
+                                    <p:location/>
+                                    , Website:
+                                    <p:url/>
+                                    <br/>
+                                    Tweets:
+                                    <p:statuses_count/>
+                                    ,
+                                    Following:
+                                    <p:friends_count/>
+                                    ,
 
-                                Followers:<p:followers_count/>,
-                                   Favourites : <p:favourites_count/>,
-                                   Listed: <p:listed_count/>
-                               </b>
+                                    Followers:
+                                    <p:followers_count/>
+                                    ,
+                                    Favourites :
+                                    <p:favourites_count/>
+                                    ,
+                                    Listed:
+                                    <p:listed_count/>
+                                </b>
 
 
                             </p>

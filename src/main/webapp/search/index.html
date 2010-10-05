@@ -9,9 +9,12 @@
                 <div class="entry">
 
 
-                    <lift:SharedSnippet form="GET">
-                        <ss:search/>
-                        <ss:submit/>
+                    <h2 class="title"><a href="#">Find influencers by topic, keywords or #hashtags. </a></h2>
+                    <lift:SharedSnippet form="POST">
+                        <p id="srch">
+                            <ss:search/>
+                            <ss:submit/>
+                        </p>
 
                     </lift:SharedSnippet>
                     <div style="clear: both;">&nbsp;</div>
@@ -23,23 +26,25 @@
                         </lift:SearchSnippet>
 
                     </a></h2>
+                    <br/><br/>
 
-                    <ul>
-                        <li>
-                            <a href="/mashable" class="badge">
-                                <div class="thumb"><img
-                                        src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
-                                </div>
-                                <div class="username">mashable</div>
-                                <div class="score">
-                                    <img src="/classpath/images/klout_mini.png"/> 99
-                                </div>
-                            </a>
-                        </li>
+                    <div align="center">
+                        <ul>
+                            <li>
+                                <a href="/mashable" class="badge">
+                                    <div class="thumb"><img
+                                            src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
+                                    </div>
+                                    <div class="username">mashable</div>
+                                    <div class="score">
+                                        <img src="/classpath/images/klout_mini.png"/> 99
+                                    </div>
+                                </a>
+                            </li>
 
-                    </ul>
-                    <p>To view volume and/or Influence rating. login with your twitter account.</p>
-
+                        </ul>
+                        <p>To view volume and/or Influence rating. login with your twitter account.</p>
+                    </div>
                 </div>
             </div>
 

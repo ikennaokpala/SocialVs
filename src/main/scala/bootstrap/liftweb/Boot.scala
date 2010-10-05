@@ -33,9 +33,9 @@ class Boot {
 
         //Logout and Redirecto home page(/)
         LiftRules.dispatch.append {
-            case Req("logout" :: Nil, _, GetRequest) => S.request.foreach(_.request.session.terminate)
-            //            UserSession.is.
-            S.redirectTo("/")
+            case Req("logout" :: Nil, _, GetRequest) => S.request.foreach(_.request.session.terminate); S.redirectTo("/")
+            case Req("search" :: "index" :: Nil, _, GetRequest) if (searchObj.is.isEmpty) => S.redirectTo("/")
+
         }
 
         // rewrite rules for urls like rs.com/twitter-screen-name
