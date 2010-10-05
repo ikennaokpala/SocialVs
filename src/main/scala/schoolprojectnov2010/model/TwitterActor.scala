@@ -3,7 +3,6 @@ package schoolprojectnov2010.model
 import net.liftweb.actor._
 import dispatch._
 import json._
-import json.JsHttp._
 import oauth.{Consumer, Token}
 import twitter._
 import net.liftweb.http.S
@@ -32,17 +31,18 @@ case object AuthURL
 case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
 case class Mentions(screenName: String)
+case class InfluencersSearch(search: String)
 case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
-                                 description: String, text: String, statuses_count: BigDecimal,
-                                 friends_count: BigDecimal, followers_count: BigDecimal,
-                                 listed_count: BigDecimal, favourites_count: BigDecimal,
-                                 url: String, location: String, profile_image_url: String)
+                         description: String, text: String, statuses_count: BigDecimal,
+                         friends_count: BigDecimal, followers_count: BigDecimal,
+                         listed_count: BigDecimal, favourites_count: BigDecimal,
+                         url: String, location: String, profile_image_url: String)
 
 class TwitterActor extends LiftActor {
     val http = new Http
     val topic = ""
-    val topicString= "search.json?key=n6aahpgj7geqespvdvsbuk7u&topic="+topic
-    val req = :/("api.klout.com")/"1"/"topics"/topicString
+    val topicString = "search.json?key=n6aahpgj7geqespvdvsbuk7u&topic=" + topic
+    val req = :/("api.klout.com") / "1" / "topics" / topicString
     var request_token: Option[Token] = None
     var access_token: Option[Token] = None
     val httpHost = S.hostAndPath
@@ -75,7 +75,7 @@ class TwitterActor extends LiftActor {
 
                     val twt1 = for{
                         twtJsonList <- http(Status(screenName).timeline)
-//                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
+                        //                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
                         Status.user.screen_name(screen_name) = twtJsonList
                         Status.text(text) = twtJsonList
                         Status.user.followers_count(followers_count) = twtJsonList
@@ -110,6 +110,9 @@ class TwitterActor extends LiftActor {
         case Mentions(screenName) =>
 
             val req = Twitter.host
+        case InfluencersSearch(search) => println("influencers Search has been fired !!")
+        reply("influencers Search has been fired From Actor")
+
 
         case _ => println("unkown message")
 

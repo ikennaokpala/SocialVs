@@ -1,0 +1,54 @@
+<lift:surround with="default" at="content">
+
+    <!-- end #header-wrapper -->
+    <div id="page">
+        <div id="cont">
+
+            <div align="center" class="post">
+
+                <div class="entry">
+
+
+                    <lift:SharedSnippet form="GET">
+                        <ss:search/>
+                        <ss:submit/>
+
+                    </lift:SharedSnippet>
+                    <div style="clear: both;">&nbsp;</div>
+                    <div style="clear: both;">&nbsp;</div>
+
+                    <h2 class="title"><a href="#">Klout identified the following as top influencers on topic.
+                        <lift:SearchSnippet>
+                            <sn:searchtest/>
+                        </lift:SearchSnippet>
+
+                    </a></h2>
+
+                    <ul>
+                        <li>
+                            <a href="/mashable" class="badge">
+                                <div class="thumb"><img
+                                        src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
+                                </div>
+                                <div class="username">mashable</div>
+                                <div class="score">
+                                    <img src="/classpath/images/klout_mini.png"/> 99
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <p>To view volume and/or Influence rating. login with your twitter account.</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- end #content -->
+
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+
+
+</lift:surround>

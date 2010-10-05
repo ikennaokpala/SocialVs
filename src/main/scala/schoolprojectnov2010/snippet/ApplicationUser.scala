@@ -8,8 +8,7 @@ object UserSession extends SessionVar[Option[TwitterUser]](None)
 
 class ApplicationUser {
 
-  var user: TwitterUser =
-    UserSession.is.getOrElse(createUserForSession)
+  var user: TwitterUser = UserSession.is.getOrElse(createUserForSession)
 
   // hold instance of TwitterUser in Session
   def createUserForSession: TwitterUser = {

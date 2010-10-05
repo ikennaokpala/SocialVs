@@ -295,7 +295,7 @@ hr {
 
 #smallbox {
 /*padding: 0.15em;*/
-    /*float: right;*/
+/*float: right;*/
     width: 14em;
     height: 24px;
     border: 3px solid #ddd;
@@ -359,6 +359,16 @@ hr {
 
 .post .entry {
     padding: 10px 15px;
+}
+
+.post .entry ul {
+    list-style-type: none;
+
+}
+
+.post .entry a {
+    text-decoration: none;
+
 }
 
 .post .entry p {
@@ -657,3 +667,117 @@ html ul.tabs li.active, html ul.tabs li.active a:hover {
     border: 1px solid #ddd;
     padding: 5px;
 }
+
+/***
+       BADGE AREA
+
+***/
+
+.badge {
+    -moz-border-radius: 6px;
+    -moz-box-shadow: 0 5px 1px #ddd;
+    -webkit-border-radius: 6px;
+    -webkit-box-shadow: 0 5px 1px #ddd;
+    background: #fff;
+    border: 2px solid #a9a4a6;
+    display: block;
+    line-height: 1;
+    margin-bottom: 10px;
+    position: relative;
+    text-align: center;
+    width: 125px;
+    z-index: 10
+}
+
+.thin
+.badge {
+    margin-right: 10px;
+    width: 90px
+}
+
+.badge:hover, .badge.hovered {
+}
+
+.badge:hover .username, .badge.hovered
+.username {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-bottom-left: 4px;
+    -webkit-border-bottom-right: 4px;
+    background: #360;
+    color: #fff
+}
+
+.badge:hover
+.score {
+}
+
+.badge:hover .thumb, .badge.hovered
+.thumb {
+    background: #360;
+    color: #fff
+}
+
+.badge
+.thumb {
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    min-height: 73px;
+    position: relative
+}
+
+.badge .thumb
+img {
+    border: 1px solid #fff;
+    height: 73px;
+    width: 73px
+}
+
+.badge
+div {
+    padding: 5px 15px
+}
+
+.thin .thumb
+img {
+    height: 50px;
+    margin-top: 3px;
+    width: 50px
+}
+
+.badge
+.tag {
+    color: #797979;
+    font-size: 12px
+}
+
+.badge
+.username {
+    color: #9b9b9b;
+    font-size: 11px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 0 5px 0;
+    text-transform: uppercase
+}
+
+.badge
+.score {
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    background: #eee;
+    background-image: -moz-linear-gradient(80% 80% 90deg, #fff, #eee);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.09, #fff), color-stop(0.65, #eee));
+    color: #3c3136;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 1px
+}
+
+.thin
+.score {
+    font-size: 18px;
+    line-height: 16px
+}
+

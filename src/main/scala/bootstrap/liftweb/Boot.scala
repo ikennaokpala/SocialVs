@@ -3,6 +3,7 @@ package bootstrap.liftweb
 import _root_.net.liftweb.sitemap._
 import Loc._
 import net.liftweb.http._
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -16,6 +17,8 @@ class Boot {
         val entries =
         Menu(Loc("index", List("index"),
             "Home")) ::
+                Menu(Loc("search", List("search", "index"),
+                    "Search", Hidden)) ::
                 Menu(Loc("profile", List("profile", "index"),
                     "Profile", Hidden)) ::
                 Menu(Loc("logout", List("logout", "logout"), "logout", Hidden)) ::
