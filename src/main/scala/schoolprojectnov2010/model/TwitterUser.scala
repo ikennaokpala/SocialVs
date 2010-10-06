@@ -13,6 +13,6 @@ class TwitterUser extends Tweeter {
     def tweetsForName(screenName: String) =
         twitterActor !? Tweets(screenName)
 
-    def topicInfluencersSeach(search: String) =
-    twitterActor !?  InfluencersSearch (search)
+    def topicInfluencersSearch(search: String) =
+        twitterActor !? InfluencersSearch(search)
 }

@@ -32,7 +32,7 @@ h3 {
 }
 
 input {
-    /*padding: 0.15em;*/
+/*padding: 0.15em;*/
     width: 17em;
     height: 22px;
     border: 3px solid #ddd;
@@ -87,10 +87,9 @@ hr {
 
 #btn {
     background-color: #360;
-    color: white;
-    /*margin-right: 20px;*/
-    /*margin-top: 25px;*/
-    /*float: none;*/
+    color: white; /*margin-right: 20px;*/
+/*margin-top: 25px;*/
+/*float: none;*/
     width: 120px;
     height: 29px;
 }
@@ -187,43 +186,43 @@ hr {
 /* Search */
 
 /*#search {*/
-    /*float: right;*/
-    /*width: 260px;*/
+/*float: right;*/
+/*width: 260px;*/
 /*}*/
 
 /*#search form {*/
-    /*float: right;*/
-    /*margin: 0;*/
-    /*padding: 4px 0px 0 0;*/
+/*float: right;*/
+/*margin: 0;*/
+/*padding: 4px 0px 0 0;*/
 /*}*/
 
 /*#search fieldset {*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-    /*border: none;*/
+/*margin: 0;*/
+/*padding: 0;*/
+/*border: none;*/
 /*}*/
 
 /*#search input {*/
-    /*float: left;*/
-    /*font: 12px Georgia, "Times New Roman", Times, serif;*/
-    /*border: none;*/
+/*float: left;*/
+/*font: 12px Georgia, "Times New Roman", Times, serif;*/
+/*border: none;*/
 /*}*/
 
 /*#search-text {*/
-    /*width: 200px;*/
-    /*height: 18px;*/
-    /*padding: 3px 0 0 5px;*/
-    /*border: 1px solid #333333;*/
-    /*background: #ECF9E4;*/
-    /*color: #000000;*/
+/*width: 200px;*/
+/*height: 18px;*/
+/*padding: 3px 0 0 5px;*/
+/*border: 1px solid #333333;*/
+/*background: #ECF9E4;*/
+/*color: #000000;*/
 /*}*/
 
 /*#search-submit {*/
-    /*height: 21px;*/
-    /*margin-left: 10px;*/
-    /*padding: 0px 5px;*/
-    /*background: #5AA01B;*/
-    /*color: #FFFFFF;*/
+/*height: 21px;*/
+/*margin-left: 10px;*/
+/*padding: 0px 5px;*/
+/*background: #5AA01B;*/
+/*color: #FFFFFF;*/
 /*}*/
 
 /* Page */
@@ -316,6 +315,7 @@ hr {
 #srch {
 
 }
+
 #stxt {
     margin-top: -25px;
     float: right;
@@ -675,6 +675,14 @@ html ul.tabs li.active, html ul.tabs li.active a:hover {
        BADGE AREA
 
 ***/
+#badgediv {
+    width: 920px;
+}
+#badgediv li {
+    display:inline;
+    position:relative;
+}
+
 
 .badge {
     -moz-border-radius: 6px;

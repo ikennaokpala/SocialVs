@@ -1,6 +1,6 @@
 package schoolprojectnov2010.snippet
 
-import net.liftweb._
+import _root_.net.liftweb._
 import util._
 import Helpers._
 import http.S

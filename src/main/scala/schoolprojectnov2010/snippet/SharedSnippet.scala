@@ -39,12 +39,15 @@ class SharedSnippet extends ApplicationUser {
             "submit" -> SHtml.submit(S.?("Go"), () => S.redirectTo("/" + search), "id" -> "smallboxbtn", "onclick" ->
                     JsIf(JsEq(ValById("smallbox"), ""),
                         Alert("You are expected to provide a twitter user name") & JsReturn(false))))
-
     }
 
-    def doSearch(search: String) =
-        S.redirectTo("/search/index")
-    Influencer set (user.topicInfluencersSeach(search))
+    def doSearch(searchInput: String) = {
+//        println("doSearch was called")
 
+        val influencerList = user.topicInfluencersSearch(searchInput)
+        Influencer set (influencerList)
+        S.redirectTo("/search/index")
+
+    }
 
 }

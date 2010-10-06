@@ -3,9 +3,11 @@ package schoolprojectnov2010.model
 import net.liftweb.actor._
 import dispatch._
 import json._
+import JsHttp._
 import oauth.{Consumer, Token}
 import twitter._
 import net.liftweb.http.S
+
 
 trait ExtUserProps extends UserProps with Js {
     val id = 'id ! num
@@ -31,7 +33,8 @@ case object AuthURL
 case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
 case class Mentions(screenName: String)
-case class InfluencersSearch(search: String)
+case class InfluencersSearch(searchInput: String)
+case class KloutUser(user_name: String, score: BigDecimal, picture: String)
 case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          description: String, text: String, statuses_count: BigDecimal,
                          friends_count: BigDecimal, followers_count: BigDecimal,
@@ -40,9 +43,6 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
 
 class TwitterActor extends LiftActor {
     val http = new Http
-    val topic = ""
-    val topicString = "search.json?key=n6aahpgj7geqespvdvsbuk7u&topic=" + topic
-    val req = :/("api.klout.com") / "1" / "topics" / topicString
     var request_token: Option[Token] = None
     var access_token: Option[Token] = None
     val httpHost = S.hostAndPath
@@ -91,7 +91,7 @@ class TwitterActor extends LiftActor {
                         location = ExtUser.location(user)
                         description = ExtUser.description(user)
 
-                    } yield new TwitterUserVO(id, name, screenName,
+                    } yield TwitterUserVO(id, name, screenName,
                             description, text, statuses_count, friends_count,
                             followers_count, listed_count, favourites_count,
                             url, location, profile_image_url)
@@ -110,9 +110,26 @@ class TwitterActor extends LiftActor {
         case Mentions(screenName) =>
 
             val req = Twitter.host
-        case InfluencersSearch(search) => println("influencers Search has been fired !!")
-        reply("influencers Search has been fired From Actor")
 
+        case InfluencersSearch(searchInput) =>
+
+            try {
+                val searchresult = {
+                    val req = :/("api.klout.com") / "1" / "topics" / "search.json" <<? Map("key" -> "n6aahpgj7geqespvdvsbuk7u", "topic" -> searchInput)
+                    //                    val kjson = http(req ># {'users ! list})
+                    val kuser = for{
+                        json <- http(req ># {'users ! list})
+                        user_name = ('user_name ! str)(json)
+                        score = ('skore ! num)(json)
+                        picture = ('pic_url ! str)(json)
+                    } yield KloutUser(user_name, score, picture)
+                    kuser
+                }
+
+                reply(searchresult)
+            } catch {
+                case ex => reply((None, None))
+            }
 
         case _ => println("unkown message")
 

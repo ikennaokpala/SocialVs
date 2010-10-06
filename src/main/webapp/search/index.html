@@ -21,28 +21,31 @@
                     <div style="clear: both;">&nbsp;</div>
 
                     <h2 class="title"><a href="#">Klout identified the following as top influencers on topic.
-                        <lift:SearchSnippet>
-                            <sn:searchtest/>
-                        </lift:SearchSnippet>
+
 
                     </a></h2>
                     <br/><br/>
 
-                    <div align="center">
-                        <ul>
-                            <li>
-                                <a href="/mashable" class="badge">
-                                    <div class="thumb"><img
-                                            src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
-                                    </div>
-                                    <div class="username">mashable</div>
-                                    <div class="score">
-                                        <img src="/classpath/images/klout_mini.png"/> 99
-                                    </div>
-                                </a>
-                            </li>
+                    <div align="center" >
+                        <lift:SearchSnippet>
+                            <ul id="badgediv">
 
-                        </ul>
+                                    <sn:influencerDetails>
+
+                                        <a href="/mashable" class="badge">
+                                            <div class="thumb"><img
+                                                    src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
+                                            </div>
+                                            <div class="username">mashable</div>
+                                            <div class="score">
+                                                <img src="/classpath/images/klout_mini.png"/> 99
+                                            </div>
+                                        </a>
+                                    </sn:influencerDetails>
+
+
+                            </ul>
+                        </lift:SearchSnippet>
                         <p>To view volume and/or Influence rating. login with your twitter account.</p>
                     </div>
                 </div>
