@@ -9,7 +9,9 @@
                 <div class="entry">
 
 
-                    <h2 class="title"><a href="#">Find influencers by topic, keywords or #hashtags. </a></h2>
+                    <h2 class="title"><a href="#">Find influencers by topic, keywords. </a></h2>
+                    <span>Example of topic or keyword: tesco,  sainsbury, scala, facebook, microsoft </span>
+
                     <lift:SharedSnippet form="POST">
                         <p id="srch">
                             <ss:search/>
@@ -17,33 +19,31 @@
                         </p>
 
                     </lift:SharedSnippet>
-                    <div style="clear: both;">&nbsp;</div>
-                    <div style="clear: both;">&nbsp;</div>
-
 
                     <div align="center" id="badgediv">
                         <lift:SearchSnippet>
                             <p>According to <a href="http://www.klout.com"> Klout</a>
-                                the following are the top 50 influencers on topic :
+                                the following:<br/> are the top 50 influencers on topic :
                                 <sn:topic/>
                                 .
                             </p>
 
                             <p>To view volume and/or Influence rating. login with your twitter account.</p>
+
                             <p></p>
                             <ul>
                                 <sn:influencerDetails>
-                                <li>
-                                    <a href="/mashable" class="badge">
-                                        <div class="thumb"><img
-                                                src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
-                                        </div>
-                                        <div class="username">mashable</div>
-                                        <div class="score">
-                                            <img src="/classpath/images/klout_mini.png"/> 99
-                                        </div>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="/mashable" class="badge">
+                                            <div class="thumb"><img
+                                                    src="http://a1.twimg.com/profile_images/58439629/petepassport_bigger.PNG"/>
+                                            </div>
+                                            <div class="username">mashable</div>
+                                            <div class="score">
+                                                <img src="/classpath/images/klout_mini.png"/> 99
+                                            </div>
+                                        </a>
+                                    </li>
                                 </sn:influencerDetails>
 
 
