@@ -678,7 +678,9 @@ html ul.tabs li.active, html ul.tabs li.active a:hover {
 #badgediv {
     width: 920px;
 }
-
+#badgediv ul {
+    margin-left:60px;
+}
 #badgediv li {
     display: inline;
     overflow: hidden;

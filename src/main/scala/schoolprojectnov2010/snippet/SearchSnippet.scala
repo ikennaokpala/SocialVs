@@ -20,6 +20,7 @@ import schoolprojectnov2010.model.KloutUser
 class SearchSnippet {
     def render(xhtml: NodeSeq): NodeSeq = {
         val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
+        val topic =  influencerList(0).topic
         val influencerDetails = influencerList map {
             x => <li>
                 <a href={"/" + x.user_name} class="badge">
@@ -37,6 +38,7 @@ class SearchSnippet {
             </li>
         }
         bind("sn", xhtml,
+        "topic" -> topic,
             "influencerDetails" -> <span>
                 {influencerDetails}
             </span>)

@@ -34,7 +34,7 @@ case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
 case class Mentions(screenName: String)
 case class InfluencersSearch(searchInput: String)
-case class KloutUser(user_name: String, score: BigDecimal, picture: String)
+case class KloutUser(user_name: String, score: BigDecimal, picture: String, topic: String)
 case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          description: String, text: String, statuses_count: BigDecimal,
                          friends_count: BigDecimal, followers_count: BigDecimal,
@@ -122,7 +122,7 @@ class TwitterActor extends LiftActor {
                         user_name = ('user_name ! str)(json)
                         score = ('skore ! num)(json)
                         picture = ('pic_url ! str)(json)
-                    } yield KloutUser(user_name, score, picture)
+                    } yield KloutUser(user_name, score, picture, searchInput)
                     kuser
                 }
 
