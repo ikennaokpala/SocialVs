@@ -678,11 +678,13 @@ html ul.tabs li.active, html ul.tabs li.active a:hover {
 #badgediv {
     width: 920px;
 }
-#badgediv li {
-    display:inline;
-    position:relative;
-}
 
+#badgediv li {
+    display: inline;
+    overflow: hidden;
+    float: left;
+    margin-right: 20px;
+}
 
 .badge {
     -moz-border-radius: 6px;
@@ -784,6 +786,12 @@ img {
     font-size: 24px;
     font-weight: bold;
     margin: 0 1px
+}
+
+.badge
+.score img {
+
+    margin-right: 5px;
 }
 
 .thin

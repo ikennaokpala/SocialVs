@@ -1,8 +1,12 @@
 package schoolprojectnov2010.snippet
 
+import scala.math._
+
 import xml.NodeSeq
+
 import net.liftweb._
 import util.Helpers._
+
 import schoolprojectnov2010.model.KloutUser
 
 /**
@@ -27,7 +31,7 @@ class SearchSnippet {
                         {x.user_name}
                     </div>
                     <div class="score">
-                            <img src="/classpath/images/klout_mini.png"/>{x.score}
+                            <img src="/classpath/images/klout_mini.png"/>{round(x.score.doubleValue)}
                     </div>
                 </a>
             </li>
