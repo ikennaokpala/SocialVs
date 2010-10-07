@@ -5,6 +5,7 @@ import util._
 import Helpers._
 import http.S
 
+import scala.math._
 import scala.xml.NodeSeq
 import schoolprojectnov2010.model.TwitterUserVO
 
@@ -36,7 +37,11 @@ class TProfile extends ApplicationUser {
                     "statuses_count" -> TwtUserInfo.statuses_count.toString,
                     "followers_count" -> TwtUserInfo.followers_count.toString,
                     "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>,
-                    "friends_count" -> TwtUserInfo.friends_count.toString)
+                    "friends_count" -> TwtUserInfo.friends_count.toString,
+                    "score" -> round(TwtUserInfo.score.doubleValue).toString,
+                    "truereach" -> round(TwtUserInfo.true_reach.doubleValue).toString,
+                    "amplification" -> round(TwtUserInfo.amplification_score.doubleValue).toString,
+                    "network" -> round(TwtUserInfo.network_score.doubleValue).toString)
 
                 case _ => tprofile.asInstanceOf[NodeSeq]
             }

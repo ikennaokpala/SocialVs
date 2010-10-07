@@ -29,6 +29,11 @@ object TwitterCredentials {
     val consumer = Consumer(consumerKey, consumerSecret)
 }
 
+object KloutCredentials {
+    val key = "n6aahpgj7geqespvdvsbuk7u" // Klout Application key
+    val req = :/("api.klout.com") / "1"
+}
+
 case object AuthURL
 case class OAuthResponse(verifier: String)
 case class Tweets(screenName: String)
@@ -39,7 +44,9 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          description: String, text: String, statuses_count: BigDecimal,
                          friends_count: BigDecimal, followers_count: BigDecimal,
                          listed_count: BigDecimal, favourites_count: BigDecimal,
-                         url: String, location: String, profile_image_url: String)
+                         url: String, location: String, profile_image_url: String,
+                         score: BigDecimal, true_reach: BigDecimal,
+                         amplification_score: BigDecimal, network_score: BigDecimal)
 
 class TwitterActor extends LiftActor {
     val http = new Http
@@ -70,12 +77,24 @@ class TwitterActor extends LiftActor {
         case Tweets(screenName) =>
 
             try {
-
+                val reqScore = KloutCredentials.req / "users" / "show.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
+                val reqInfluencer = KloutCredentials.req / "soi" / "influenced_by.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
+                val reqInfluencerOf = KloutCredentials.req / "soi" / "influenced_of.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
                 val twt = {
+                    val kjson = http(reqScore ># {'users ! list}) map {'score ! obj}
+                    val score = ('kscore ! num)(kjson(0))
+                    val true_reach = ('true_reach ! num)(kjson(0))
+                    val amplification_score = ('amplification_score ! num)(kjson(0))
+                    val network_score = ('network_score ! num)(kjson(0))
+                    /*val influenced_by = {
+                        for{
 
+                        }
+
+                    }*/
                     val twt1 = for{
+
                         twtJsonList <- http(Status(screenName).timeline)
-                        //                        kjson <- http(req ># {'users ! list}) map {'score ! obj}
                         Status.user.screen_name(screen_name) = twtJsonList
                         Status.text(text) = twtJsonList
                         Status.user.followers_count(followers_count) = twtJsonList
@@ -94,7 +113,8 @@ class TwitterActor extends LiftActor {
                     } yield TwitterUserVO(id, name, screenName,
                             description, text, statuses_count, friends_count,
                             followers_count, listed_count, favourites_count,
-                            url, location, profile_image_url)
+                            url, location, profile_image_url, score, true_reach,
+                            amplification_score, network_score)
 
                     twt1
 
@@ -114,11 +134,15 @@ class TwitterActor extends LiftActor {
         case InfluencersSearch(searchInput) =>
 
             try {
+                /* val req = KloutCredentials.req / "topics" / "verify.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput)
+            val verified = http(req as_str)*/
+
                 val searchresult = {
-                    val req = :/("api.klout.com") / "1" / "topics" / "search.json" <<? Map("key" -> "n6aahpgj7geqespvdvsbuk7u", "topic" -> searchInput)
-                    //                    val kjson = http(req ># {'users ! list})
+                    val req = KloutCredentials.req / "topics" / "search.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput)
                     val kuser = for{
-                        json <- http(req ># {'users ! list})
+                        json <- http(req ># {
+                            'users ! list
+                        })
                         user_name = ('user_name ! str)(json)
                         score = ('skore ! num)(json)
                         picture = ('pic_url ! str)(json)
