@@ -6,7 +6,7 @@ import net.liftweb.util._
 import Helpers._
 
 import schoolprojectnov2010.model.KloutUser
-import xml.{Text, NodeSeq}
+import xml.NodeSeq
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,13 +39,23 @@ class SearchSnippet {
                     </li>
                 }
                 bind("sn", xhtml,
+                    "topicTitle1" -> "According to ",
+                    "topicTitle2" -> <a href="http :// www.klout.com">Klout</a>,
+                    "topicTitle3" -> "the following are the top 50 influencers on topic:",
                     "topic" -> topic,
-                    "influencerDetails" -> <span>
-                        {influencerDetails}
-                    </span>)
+                    "instruction" -> "To view volume and/or Influence rating.login with your twitter account.",
+                    "influencerDetails" ->
+                            <span>
+                                {influencerDetails}
+                            </span>)
             case _ => bind("sn", xhtml,
-                "topic" -> Text("Oop !! Error"),
-                "influencerDetails" -> Text("Oop !! Error"))
+                "topicTitle1" -> "",
+                "topicTitle2" -> "",
+                "topicTitle3" -> "",
+                "topic" -> <h1>Oop !! Error >>> not found...</h1>,
+                "instruction" -> "",
+
+                "influencerDetails" -> "")
 
         }
     }

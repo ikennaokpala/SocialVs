@@ -86,12 +86,7 @@ class TwitterActor extends LiftActor {
                     val true_reach = ('true_reach ! num)(kjson(0))
                     val amplification_score = ('amplification_score ! num)(kjson(0))
                     val network_score = ('network_score ! num)(kjson(0))
-                    /*val influenced_by = {
-                        for{
 
-                        }
-
-                    }*/
                     val twt1 = for{
 
                         twtJsonList <- http(Status(screenName).timeline)
@@ -134,8 +129,6 @@ class TwitterActor extends LiftActor {
         case InfluencersSearch(searchInput) =>
 
             try {
-                /* val req = KloutCredentials.req / "topics" / "verify.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput)
-            val verified = http(req as_str)*/
 
                 val searchresult = {
                     val req = KloutCredentials.req / "topics" / "search.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput)
