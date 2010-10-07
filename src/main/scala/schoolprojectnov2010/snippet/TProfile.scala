@@ -1,14 +1,13 @@
 package schoolprojectnov2010.snippet
 
 import _root_.net.liftweb._
+import common.{Box, Empty, Full}
+import http.{SessionVar, S}
 import util._
 import Helpers._
-import http.S
-
 import scala.math._
 import scala.xml.NodeSeq
 import schoolprojectnov2010.model.TwitterUserVO
-
 
 class TProfile extends ApplicationUser {
     def render(xhtml: NodeSeq): NodeSeq =
@@ -45,7 +44,7 @@ class TProfile extends ApplicationUser {
 
                 case _ => tprofile.asInstanceOf[NodeSeq]
             }
-            case false => notAuthorised
+            case false => notAuthorised;
         }
 
     def userStream(screen_name: String) = {

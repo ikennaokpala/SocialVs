@@ -48,7 +48,7 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          score: BigDecimal, true_reach: BigDecimal,
                          amplification_score: BigDecimal, network_score: BigDecimal)
 
-class TwitterActor extends LiftActor {
+class ApplicationActor extends LiftActor {
     val http = new Http
     var request_token: Option[Token] = None
     var access_token: Option[Token] = None

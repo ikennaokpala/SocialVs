@@ -1,7 +1,7 @@
 package schoolprojectnov2010.model
 
 class TwitterUser extends Tweeter {
-    val twitterActor = new TwitterActor
+    val twitterActor = new ApplicationActor
     var authorized: Boolean = false
 
     def twitterAuthURL =
