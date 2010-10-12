@@ -47,6 +47,10 @@ p, ul, ol {
     text-align: justify;
 }
 
+p h1{
+    color:red;
+}
+
 ul, ol {
 }
 

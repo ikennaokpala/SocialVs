@@ -3,8 +3,6 @@ package bootstrap.liftweb
 import _root_.net.liftweb.sitemap._
 import Loc._
 import net.liftweb.http._
-import schoolprojectnov2010.snippet.searchObj
-
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -34,8 +32,9 @@ class Boot {
 
         //Logout and Redirecto home page(/)
         LiftRules.dispatch.append {
-            case Req("logout" :: Nil, _, GetRequest) => S.request.foreach(_.request.session.terminate); S.redirectTo("/")
-//            case Req("search" :: "index" :: Nil, _, GetRequest) if (searchObj.is.isEmpty) => S.redirectTo("/")
+            case Req("logout" :: Nil, _, GetRequest) => S.request.foreach(_.request.session.terminate);
+            S.redirectTo("/")
+            //            case Req("search" :: "index" :: Nil, _, GetRequest) if (searchObj.is.isEmpty) => S.redirectTo("/")
 
         }
 
@@ -71,15 +70,7 @@ class Boot {
     // find out how to check if screen names exist in Twitter
     def isScreenNameValid(twitterScreenName: String): Boolean = {
         SiteMap.findAndTestLoc(twitterScreenName).isEmpty
-        /* if (SiteMap.findAndTestLoc(twitterScreenName).isEmpty & UserCheck.authorized) {
 
-            true
-
-        } else {
-            S.redirectTo("/")
-            false
-
-        }*/
     }
 
 }
