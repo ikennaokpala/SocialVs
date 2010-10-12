@@ -49,6 +49,7 @@ p, ul, ol {
 
 p h1{
     color:red;
+    text-transform:none;
 }
 
 ul, ol {

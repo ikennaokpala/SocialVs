@@ -55,7 +55,7 @@ class SearchSnippet {
                 "topicTitle1" -> "",
                 "topicTitle2" -> "",
                 "topicTitle3" -> "",
-                "topic" -> <h1>Oop !! Error >>> not found...</h1>,
+                "topic" -> <h1>Oops !!! Error >>> Not Found...</h1>,
                 "instruction" -> "",
 
                 "influencerDetails" -> "")
