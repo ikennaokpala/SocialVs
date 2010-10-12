@@ -56,13 +56,14 @@ class TwitterOAuth extends ApplicationUser {
 
     def userLoggedIn = <span>
         <li>
-            <a href={user.screenName}>
+            <a href={"/" + user.screenName}>
                 {user.screenName}
             </a>
         </li> <li>
-            <a href="logout" class="last">Log Out</a>
+            <a href="/logout" class="last">Log Out</a>
         </li>
     </span>
+
 }
 }
 }
