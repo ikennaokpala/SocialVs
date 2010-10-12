@@ -1,8 +1,7 @@
 package schoolprojectnov2010.snippet
 
 import _root_.net.liftweb._
-import common.{Box, Empty, Full}
-import http.{SessionVar, S}
+import http.S
 import util._
 import Helpers._
 import scala.math._
@@ -52,10 +51,14 @@ class TProfile extends ApplicationUser {
         userInfoList
     }
 
-    def noTweets: NodeSeq = <div>no tweets here</div>
+    def noTweets: NodeSeq = <div>
+        no tweets here
+    </div>
 
     def notAuthorised: NodeSeq = <center>
-        <h2>You need to login to used this application</h2>
+        <h2>
+            You need to login to used this application
+        </h2>
     </center>
 
 }

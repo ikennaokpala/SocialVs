@@ -1,6 +1,7 @@
 package schoolprojectnov2010.snippet
 
-import scala.math._
+import scala._
+import math._
 
 import net.liftweb.util._
 import Helpers._
@@ -21,8 +22,10 @@ class SearchSnippet {
         Influencer.is match {
             case x :: rest =>
                 val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
-                val topic = influencerList(0).topic
-                val influencerDetails = influencerList map {
+                //                val sortedInfluencerList = stableSort(influencerList, (x:KloutUser, y:KloutUser) => round(x.score.toInt) < round(y.score.toInt))
+                val sortedInfluencerList = influencerList sortWith (_.score < _.score)
+                val topic = sortedInfluencerList(0).topic
+                val influencerDetails = sortedInfluencerList.reverse map {
                     x => <li>
                         <a href={"/" + x.user_name} class="badge">
                             <div class="thumb">
