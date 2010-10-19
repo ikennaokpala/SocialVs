@@ -135,6 +135,7 @@ class ApplicationActor extends LiftActor {
                     val kuser = for{
                         json <- http(req ># {
                             'users ! list
+
                         })
                         user_name = ('user_name ! str)(json)
                         score = ('skore ! num)(json)
