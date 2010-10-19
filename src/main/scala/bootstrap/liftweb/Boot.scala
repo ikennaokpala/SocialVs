@@ -68,6 +68,9 @@ class Boot {
     }
   }
 
+  import net.liftweb.widgets.flot._
+  Flot.init
+
 
   // find out how to check if screen names exist in Twitter
   def isScreenNameValid(twitterScreenName: String): Boolean = {

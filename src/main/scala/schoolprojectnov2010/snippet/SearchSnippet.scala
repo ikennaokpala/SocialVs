@@ -3,15 +3,12 @@ package schoolprojectnov2010.snippet
 import scala._
 import math._
 
-import net.liftweb.widgets.flot._
-import net.liftweb.common._
+import net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
-
+import net.liftweb.widgets.flot._
+import net.liftweb.common._
 import JE._
-
-import net.liftweb.util._
-import Helpers._
 
 import schoolprojectnov2010.model.KloutUser
 import xml.NodeSeq
@@ -26,34 +23,11 @@ import xml.NodeSeq
  */
 
 class SearchSnippet {
-  val width = 500
-  val height = 225
-
   def render(xhtml: NodeSeq): NodeSeq = {
     Influencer.is match {
       case x :: rest =>
         val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
-        //                val sortedInfluencerList = stableSort(influencerList, (x:KloutUser, y:KloutUser) => round(x.score.toInt) < round(y.score.toInt))
         val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
-       /* val data = sortedInfluencerList map {_.score}
-        val bar_labels = sortedInfluencerList map {_.user_name}
-        val googleGraph = "http://chart.apis.google.com/chart?" + List(
-          "chxt=x,y",
-          //"chbh=52",
-          "chxl=0:|" + bar_labels.mkString("|"),
-          "chs=%dx%d".format(width, height),                    val data = sortedInfluencerList map {_.score}
-        val bar_labels = sortedInfluencerList map {_.user_name}
-        val googleGraph = "http://chart.apis.google.com/chart?" + List(
-          "chxt=x,y",
-          //"chbh=52",
-          "chxl=0:|" + bar_labels.mkString("|"),
-          "chs=%dx%d".format(width, height),
-          "cht=bhg",
-          "chco=A2C180",
-          "chd=t:" + data.mkString(",")).mkString("&")
-          "cht=bhg",
-          "chco=A2C180",
-          "chd=t:" + data.mkString(",")).mkString("&")*/
         val topic = sortedInfluencerList(0).topic
         val influencerDetails = sortedInfluencerList map {
           x => <li>
@@ -82,7 +56,7 @@ class SearchSnippet {
                     {influencerDetails}
                   </span>,
 
-          "graph" -> "") // <img src={googleGraph.toString} width='1024' height='225' alt="graph"/>)
+          "graph" -> flot _) 
 
       case _ => bind("sn", xhtml,
         "topicTitle1" -> "",
@@ -98,17 +72,30 @@ class SearchSnippet {
 
   }
 
-  //
-  //  def googleUrl = "http://chart.apis.google.com/chart?" + List(
-  //    "chxt=x,y",
-  //    "chxl=0:|" + bar_labels.mkString("|"),
-  //    "chs=%dx%d".format(width, height),
-  //    "cht=bvg",
-  //    "chco=A2C180",
-  //    "chd=t:" + data.mkString(",")).mkString("&")
+  def flot(xhtml: NodeSeq) = {
+    val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
+    val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
+    val data = sortedInfluencerList map {_.score}
+    val bar_labels = sortedInfluencerList map {_.user_name}
 
-  //  def google(xhtml: NodeSeq) = <img src={googleUrl} width={width} height={height} alt="graph"/>
+    // One FlotSerie for each bar
+    val data_to_plot = for ((y, x) <- data zipWithIndex) yield new FlotSerie() {
+      override val data: List[(Double, Double)] = (x.toDouble, y.toDouble) :: Nil
+      override val label = Full(bar_labels(x))
+    }
 
+    val options: FlotOptions = new FlotOptions() {
+      override val series = Full(Map("bars" -> JsObj("show" -> true, "barWidth" -> 1.0)))
+
+      /*override val xaxis = Full(new FlotAxisOptions() {
+        override def min = Some(0d)
+
+        override def max = Some(data.length * 1d)
+      })*/
+    }
+
+    Flot.render("graph_area", data_to_plot, options, Flot.script(xhtml))
+  }
 
 
 }
