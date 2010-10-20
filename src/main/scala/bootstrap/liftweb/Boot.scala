@@ -55,6 +55,8 @@ class Boot {
       case "images" :: _ => true
       case "docs" :: _ => true
       case "js" :: _ => true
+      case "flot" :: "jquery.flot.stack.js" :: Nil => true
+      
     }
 
     //page error handling

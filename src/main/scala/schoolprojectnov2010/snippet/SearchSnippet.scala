@@ -23,6 +23,10 @@ import xml.NodeSeq
  */
 
 class SearchSnippet {
+  val title = <b>According to
+    <a href="http://www.klout.com">Klout</a>
+    the following are the top 50 influencers on topic:</b>
+
   def render(xhtml: NodeSeq): NodeSeq = {
     Influencer.is match {
       case x :: rest =>
@@ -45,23 +49,19 @@ class SearchSnippet {
             </a>
           </li>
         }
-        bind("sn", xhtml,
-          "topicTitle1" -> "According to ",
-          "topicTitle2" -> <a href="http :// www.klout.com">Klout</a>,
-          "topicTitle3" -> "the following are the top 50 influencers on topic:",
-          "topic" -> topic,
-          "instruction" -> "To view volume and/or Influence rating.login with your twitter account.",
-          "influencerDetails" ->
-                  <span>
-                    {influencerDetails}
-                  </span>,
+                bind ("sn", xhtml,
+                "title" -> title,
+                "topic" -> topic,
+                "instruction" -> "To view volume and/or Influence rating.login with your twitter account.",
+                "influencerDetails" ->
+                        <span>
+                          {influencerDetails}
+                        </span>,
 
-          "graph" -> flot _) 
+                "graph" -> flot _)
 
       case _ => bind("sn", xhtml,
-        "topicTitle1" -> "",
-        "topicTitle2" -> "",
-        "topicTitle3" -> "",
+        "title" -> title,
         "topic" -> <h1>Oops ! Error >>> Topic Not Found...</h1>,
         "instruction" -> "",
 
@@ -74,24 +74,30 @@ class SearchSnippet {
 
   def flot(xhtml: NodeSeq) = {
     val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
-    val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
-    val data = sortedInfluencerList map {_.score}
-    val bar_labels = sortedInfluencerList map {_.user_name}
+    //    val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
+    val data = influencerList map {_.score}
+    val bar_labels = influencerList map {_.user_name}
 
     // One FlotSerie for each bar
     val data_to_plot = for ((y, x) <- data zipWithIndex) yield new FlotSerie() {
       override val data: List[(Double, Double)] = (x.toDouble, y.toDouble) :: Nil
-      override val label = Full(bar_labels(x))
+      //      override val label = Full(bar_labels(x))
     }
 
     val options: FlotOptions = new FlotOptions() {
       override val series = Full(Map("bars" -> JsObj("show" -> true, "barWidth" -> 1.0)))
 
-      /*override val xaxis = Full(new FlotAxisOptions() {
-        override def min = Some(0d)
+      override val xaxis = Full(new FlotAxisOptions() {
+        /*override def min = Empty //Some(0d)
 
-        override def max = Some(data.length * 1d)
-      })*/
+        override def max = Empty //Some(data.length * 1d)
+         override val mode = Full("time")
+       override val legend = Full( new FlotLegendOptions() {
+              override val container = Full("legend_area")
+          })*/
+
+
+      })
     }
 
     Flot.render("graph_area", data_to_plot, options, Flot.script(xhtml))
