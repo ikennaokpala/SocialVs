@@ -51,17 +51,19 @@ class SearchSnippet {
         }
                 bind ("sn", xhtml,
                 "title" -> title,
+                "graphTitle" -> "Graphical representation of the top influencers on topic: ",
                 "topic" -> topic,
                 "instruction" -> "To view volume and/or Influence rating.login with your twitter account.",
                 "influencerDetails" ->
-                        <span>
+                        <ul>
                           {influencerDetails}
-                        </span>,
+                        </ul>,
 
                 "graph" -> flot _)
 
       case _ => bind("sn", xhtml,
         "title" -> title,
+        "graphTitle" -> "",
         "topic" -> <h1>Oops ! Error >>> Topic Not Found...</h1>,
         "instruction" -> "",
 
