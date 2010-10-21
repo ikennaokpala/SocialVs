@@ -3,66 +3,70 @@ package snippet {
 
 
 import net.liftweb.http._
+import xml.Text
 
 class TwitterOAuth extends ApplicationUser {
-    import scala.xml.NodeSeq
-    import SHtml._
-    import js._
-    import JsCmds.{Noop, RedirectTo}
+  import scala.xml.NodeSeq
+  import SHtml._
+  import js._
+  import JsCmds.{Noop, RedirectTo}
 
-    def render(xhtml: NodeSeq) = {
-        // if user is already logged in, dont show OAuth button
-        if (user.authorized) {
-            userLoggedIn
-        } else {
-            // if user isnt logged in, then check for OAuth params on URL
-            (for{
-                tkn <- S.param("oauth_token")
-                vrfr <- S.param("oauth_verifier")
-            } yield useTokens(tkn, vrfr)) getOrElse span(xhtml, twitterAuthURL)
-        }
+  def render(xhtml: NodeSeq) = {
+    // if user is already logged in, dont show OAuth button
+    user.authorized match {
+      case true => userLoggedIn
+      case false =>
+        // if user isnt logged in, then check for OAuth params on URL
+        (for{
+          tkn <- S.param("oauth_token")
+          vrfr <- S.param("oauth_verifier")
+        } yield useTokens(tkn, vrfr)) getOrElse a(() => twitterAuthURL,
+            <img src="/classpath/images/twitter/twitter_button_3_lo.gif" alt="Twitter OAuth Button"/>)
     }
+  }
 
-    // try to generate URL for Twitter Auth requests
-    def twitterAuthURL: JsCmd = {
+  // try to generate URL for Twitter Auth requests
+  def twitterAuthURL: JsCmd = {
 
-        user.twitterAuthURL match {
+    user.twitterAuthURL match {
 
-            case (Some(url: String)) =>
+      case (Some(url: String)) =>
+//        println("I HAVE BEEN CALLED: " + url)
+        RedirectTo(url)
 
-                RedirectTo(url)
 
-            case _ =>
+      case _ =>
 
-                Noop
-        }
+        Noop
     }
+  }
 
-    // if URL has tokens, then complete OAuth process
-    def useTokens(token: String, verifier: String): NodeSeq = {
+  // if URL has tokens, then complete OAuth process
+  def useTokens(token: String, verifier: String): NodeSeq = {
 
-        user.twitterVerifyAuth(verifier) match {
+    user.twitterVerifyAuth(verifier) match {
 
-            case Some(username: String) =>
+      case Some(username: String) =>
 
-                user.authorized = true
-                user.screenName = username
-                S.redirectTo("/" + username)
-                userLoggedIn
+        user.authorized = true
+        user.screenName = username
+        //        S.redirectTo("/" + username)
+        S.redirectTo("/")
+        userLoggedIn
 
-            case _ => <b>something aint right</b>
-        }
+      case _ => <b>something aint right</b>
     }
+  }
 
-    def userLoggedIn = <span>
-        <li>
-            <a href={"/" + user.screenName}>
-                {user.screenName}
-            </a>
-        </li> <li>
-            <a href="/logout" class="last">Log Out</a>
-        </li>
-    </span>
+  def userLoggedIn = <span>
+    <li>
+      <a href={"/" + user.screenName}>
+        {user.screenName}
+      </a>
+    </li> <li>
+      <a href="/logout" class="last">Log Out</a>
+    </li>
+  </span>
 
 }
 }
