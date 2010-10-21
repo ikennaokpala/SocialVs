@@ -11,7 +11,11 @@
 
                     <h2 class="title"><a href="#">Find influencers by topic, keywords. </a></h2>
                     <span>Example of topic or keyword: xfactor, tesco, harry potter, vancouver, sports, facebook </span>
-
+                    <lift:SearchSnippet>
+                        <p>
+                            <sn:errorMsg/>
+                        </p>
+                    </lift:SearchSnippet>
                     <lift:SharedSnippet form="POST">
                         <p id="srch">
                             <ss:search/>
@@ -23,27 +27,25 @@
                     <div align="center" id="badgediv">
 
                         <lift:SearchSnippet>
+
                             <p>
+
                                 <sn:graphTitle/>
                                 <sn:topic/>
-                                .
+
                             </p>
 
-                            <p id="srch">
+                            <p>
                                 <script language="javascript" type="text/javascript"
                                         src="/classpath/flot/jquery.flot.stack.js"/>
-
-                            <div id="graph_area" style="width:920px;height:400px;"></div>
-
-                            <sn:graph/>
-                            <!-- <h1>Flot Method</h1>
-                            <lift:SearchSnippet.flot/>-->
+                                <sn:graphArea/>
+                                <sn:graph/>
 
                             </p>
                             <p>
                                 <sn:title/>
                                 <sn:topic/>
-                                . <br/>
+                                <br/>
                                 <sn:instruction/>
                             </p>
                             <p></p>

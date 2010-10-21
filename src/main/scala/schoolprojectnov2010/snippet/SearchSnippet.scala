@@ -24,13 +24,13 @@ import xml.NodeSeq
 
 
 class SearchSnippet {
-  val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
-  val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
-  val topic = sortedInfluencerList(0).topic
-  val data = influencerList map {_.score}
-  val bar_labels = influencerList map {_.user_name}
+  private lazy val influencerList = Influencer.is.asInstanceOf[List[KloutUser]]
+  private lazy val sortedInfluencerList = influencerList sortWith (_.score > _.score) //dropRight 45
+  private lazy val topic = sortedInfluencerList(0).topic + "."
+  private lazy val data = influencerList map {_.score}
+  private lazy val bar_labels = influencerList map {_.user_name}
 
-  val title = <b>According to
+  private lazy val title = <b>According to
     <a href="http://www.klout.com">Klout</a>
     the following are the top 50 influencers on topic:</b>
 
@@ -62,17 +62,19 @@ class SearchSnippet {
                   <ul>
                     {influencerDetails}
                   </ul>,
-
-          "graph" -> flot _)
+          "graphArea" -> <div id="graph_area" style="width:920px;height:400px;"></div>,
+          "graph" -> flot _,
+          "errorMsg" -> "")
 
       case _ => bind("sn", xhtml,
-        "title" -> title,
+        "title" -> "",
         "graphTitle" -> "",
-        "topic" -> <h1>Oops ! Error >>> Topic Not Found...</h1>,
+        "topic" -> "",
         "instruction" -> "",
-
         "influencerDetails" -> "",
-        "graph" -> "")
+        "graphArea" ->"",
+        "graph" -> "",
+        "errorMsg" -> <h1>Oops ! Error >>> Topic Not Found...</h1>)
 
     }
 

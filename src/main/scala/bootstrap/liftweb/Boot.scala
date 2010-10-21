@@ -10,8 +10,7 @@ import net.liftweb.http._
  */
 class Boot {
   def boot {
-    import net.liftweb.widgets.flot._
-    Flot.init
+
     // where to search snippet
     LiftRules.addToPackages("schoolprojectnov2010")
 
@@ -49,6 +48,8 @@ class Boot {
 
     }
 
+    import net.liftweb.widgets.flot._
+    Flot.init
     // Defining allowed resource folders located in the resources source folder
     ResourceServer.allow {
       //      case "jquery.js" :: Nil => true
