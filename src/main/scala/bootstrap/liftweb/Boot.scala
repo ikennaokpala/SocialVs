@@ -10,6 +10,8 @@ import net.liftweb.http._
  */
 class Boot {
   def boot {
+    import net.liftweb.widgets.flot._
+    Flot.init
     // where to search snippet
     LiftRules.addToPackages("schoolprojectnov2010")
 
@@ -56,7 +58,7 @@ class Boot {
       case "docs" :: _ => true
       case "js" :: _ => true
       case "flot" :: "jquery.flot.stack.js" :: Nil => true
-      
+
     }
 
     //page error handling
@@ -69,11 +71,6 @@ class Boot {
         NotFoundAsTemplate(ParsePath("404" :: Nil, "", true, false))
     }
   }
-
-  import net.liftweb.widgets.flot._
-  Flot.init
-
-
   // find out how to check if screen names exist in Twitter
   def isScreenNameValid(twitterScreenName: String): Boolean = {
     SiteMap.findAndTestLoc(twitterScreenName).isEmpty
