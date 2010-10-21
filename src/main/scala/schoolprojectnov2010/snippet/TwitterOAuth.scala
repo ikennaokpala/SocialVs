@@ -1,9 +1,6 @@
-package schoolprojectnov2010 {
-package snippet {
-
+package schoolprojectnov2010.snippet
 
 import net.liftweb.http._
-import xml.Text
 
 class TwitterOAuth extends ApplicationUser {
   import scala.xml.NodeSeq
@@ -68,6 +65,4 @@ class TwitterOAuth extends ApplicationUser {
     </li>
   </span>
 
-}
-}
 }
