@@ -44,7 +44,7 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          description: String, text: String, statuses_count: BigDecimal,
                          friends_count: BigDecimal, followers_count: BigDecimal,
                          listed_count: BigDecimal, favourites_count: BigDecimal,
-                         url: String, location: String, profile_image_url: String,
+                         /*url: String,*/ location: String, profile_image_url: String,
                          score: BigDecimal, true_reach: BigDecimal,
                          amplification_score: BigDecimal, network_score: BigDecimal)
 
@@ -99,7 +99,7 @@ class ApplicationActor extends LiftActor {
                         friends_count = ExtUser.friends_count(user)
                         listed_count = ExtUser.listed_count(user)
                         favourites_count = ExtUser.favourites_count(user)
-                        url = ExtUser.url(user)
+                       /* url = ExtUser.url(user)*/
                         profile_image_url = ExtUser.profile_image_url(user)
                         name = ExtUser.name(user)
                         location = ExtUser.location(user)
@@ -108,9 +108,9 @@ class ApplicationActor extends LiftActor {
                     } yield TwitterUserVO(id, name, screenName,
                             description, text, statuses_count, friends_count,
                             followers_count, listed_count, favourites_count,
-                            url, location, profile_image_url, score, true_reach,
+                            /*url,*/ location, profile_image_url, score, true_reach,
                             amplification_score, network_score)
-
+//                 println("THE TWITTER INFORMATION FOR"+screenName+" from aplication IS : "+twt1)
                     twt1
 
 
@@ -119,7 +119,7 @@ class ApplicationActor extends LiftActor {
                 reply(twt)
             } catch {
 
-                case _ => reply(Nil)
+                case ex => println (ex); reply((None, None))
             }
 
         case Mentions(screenName) =>

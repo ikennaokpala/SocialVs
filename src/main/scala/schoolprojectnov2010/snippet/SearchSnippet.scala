@@ -39,7 +39,7 @@ class SearchSnippet {
       case x :: rest =>
         val influencerDetails = sortedInfluencerList map {
           x => <li>
-            <a href={"/" + x.user_name} class="badge">
+            <a href={"/" + x.user_name.trim} class="badge">
               <div class="thumb">
                   <img
                   src={x.picture}/>

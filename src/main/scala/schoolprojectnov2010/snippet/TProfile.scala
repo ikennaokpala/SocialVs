@@ -9,6 +9,7 @@ import scala.xml.NodeSeq
 import schoolprojectnov2010.model.TwitterUserVO
 
 class TProfile extends ApplicationUser {
+    val screenName = S.param("screenName")
     def render(xhtml: NodeSeq): NodeSeq =
         user.authorized match {
             case true => val tprofile = (for{
@@ -16,6 +17,7 @@ class TProfile extends ApplicationUser {
             } yield userStream(screenName)) getOrElse noTweets
             tprofile match {
                 case x :: rest => val TwtInfoList = tprofile.asInstanceOf[List[TwitterUserVO]]
+//                println("THE TWITTER INFORMATION FOR"+screenName+"  IS :"+TwtInfoList)
                 val TwtUserInfo = TwtInfoList(0)
                 val text = TwtInfoList map (n => <li>
                     {n.text}
@@ -27,7 +29,7 @@ class TProfile extends ApplicationUser {
                     "screen_name_anchor" -> <a>@
                         {TwtUserInfo.screenName}
                     </a>,
-                    "url" -> TwtUserInfo.url,
+                    /*"url" -> TwtUserInfo.url,*/
                     "favourites_count" -> TwtUserInfo.favourites_count.toString,
                     "listed_count" -> TwtUserInfo.listed_count.toString,
                     "text" -> text,
@@ -41,7 +43,24 @@ class TProfile extends ApplicationUser {
                     "amplification" -> round(TwtUserInfo.amplification_score.doubleValue).toString,
                     "network" -> round(TwtUserInfo.network_score.doubleValue).toString)
 
-                case _ => tprofile.asInstanceOf[NodeSeq]
+                case _ =>  bind("p", xhtml,
+                    "name" -> "Not a valid Twitter account !!",
+                    "description" -> "",
+                    "screen_name" -> "",
+                    "screen_name_anchor" -> "",
+                    /*"url" -> "",*/
+                    "favourites_count" -> "",
+                    "listed_count" -> "",
+                    "text" -> "",
+                    "location" -> "",
+                    "statuses_count" -> "",
+                    "followers_count" -> "",
+                    "profile_picture" ->"",
+                    "friends_count" -> "",
+                    "score" -> "",
+                    "truereach" -> "",
+                    "amplification" -> "",
+                    "network" -> "")
             }
             case false => notAuthorised;
         }
