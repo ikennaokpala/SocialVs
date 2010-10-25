@@ -47,10 +47,10 @@ p, ul, ol {
     text-align: justify;
 }
 
-p h1{
-    color:red;
-    text-transform:none;
-    margin-bottom:-100px;
+p h1 {
+    color: red;
+    text-transform: none;
+    margin-bottom: -100px;
 }
 
 ul, ol {
@@ -166,6 +166,10 @@ span {
     display: block;
     float: left;
     border-right: 1px solid #AFD147;
+}
+
+#menu .btnimg {
+    border-right: 0px;
 }
 
 #menu a {
@@ -616,8 +620,9 @@ span {
     margin: 0 auto;
 
 }
-#belowfooter .text{
-    text-decoration:none;
+
+#belowfooter .text {
+    text-decoration: none;
 }
 
 #belowfooter a {

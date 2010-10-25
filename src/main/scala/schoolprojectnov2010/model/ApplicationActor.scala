@@ -78,33 +78,12 @@ class ApplicationActor extends LiftActor {
 
       try {
         val reqScore = KloutCredentials.req / "users" / "show.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
-        val reqInfluencedBy = KloutCredentials.req / "soi" / "influenced_by.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
-        val reqInfluencerOf = KloutCredentials.req / "soi" / "influenced_of.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
         val twt = {
           val kjson = http(reqScore ># {'users ! list}) map {'score ! obj}
           val score = ('kscore ! num)(kjson(0))
           val true_reach = ('true_reach ! num)(kjson(0))
           val amplification_score = ('amplification_score ! num)(kjson(0))
           val network_score = ('network_score ! num)(kjson(0))
-
-          val influencedBy = {
-            val twitter_screen_name = for{
-              influencerList <- http(reqInfluencedBy ># {'users ! list}) flatten {'influencers ! list}
-              screen_name = ('twitter_screen_name ! str)(influencerList)
-              kscore = ('kscore ! num)(influencerList)
-            } yield (screen_name, kscore)
-           twitter_screen_name
-          }
-          
-          val influencerOf = {
-            val twitter_screen_name = for{
-              influencerList <- http(reqInfluencerOf ># {'users ! list}) flatten {'influencers ! list}
-              screen_name = ('twitter_screen_name ! str)(influencerList)
-              kscore = ('kscore ! num)(influencerList)
-            } yield (screen_name, kscore)
-           twitter_screen_name
-          }
-
           val twt1 = for{
 
             twtJsonList <- http(Status(screenName).timeline)
@@ -128,10 +107,7 @@ class ApplicationActor extends LiftActor {
               location, profile_image_url, score, true_reach,
               amplification_score, network_score)
           twt1
-
-
         }
-
         reply(twt)
       } catch {
 
