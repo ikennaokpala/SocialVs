@@ -23,6 +23,20 @@ class TProfile extends ApplicationUser {
         val text = TwtInfoList map (n => <li>
           {n.text}
         </li>)
+        val influencedByDetails = {
+          TwtUserInfo.influencedBy match {
+            case x :: rest => TwtUserInfo.influencedBy map {
+              x => // println("This is the influencedByDetails " + x)
+                <li>
+                    <img src="/classpath/images/klout_mini.png"/>{round(x._2.doubleValue)}<a href={"/" + x._1}>
+                  {"| @" + x._1}
+                </a>
+
+                </li>
+            }
+            case _ =>  <li><em>Oops !! This information is not available at the moment..</em></li>
+          }
+        }
         bind("p", xhtml,
           "error" -> "",
           "name" -> TwtUserInfo.name.toString,
@@ -31,7 +45,7 @@ class TProfile extends ApplicationUser {
           "screen_name_anchor" -> <a>@
             {TwtUserInfo.screenName}
           </a>,
-          
+          "influencedBy" -> influencedByDetails,
           "favourites_count" -> TwtUserInfo.favourites_count.toString,
           "listed_count" -> TwtUserInfo.listed_count.toString,
           "text" -> text,
@@ -41,6 +55,8 @@ class TProfile extends ApplicationUser {
           "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>,
           "friends_count" -> TwtUserInfo.friends_count.toString,
           "score" -> round(TwtUserInfo.score.doubleValue).toString,
+          "kclass" -> TwtUserInfo.kclass,
+          "klout_description" -> TwtUserInfo.klout_description,
           "truereach" -> round(TwtUserInfo.true_reach.doubleValue).toString,
           "amplification" -> round(TwtUserInfo.amplification_score.doubleValue).toString,
           "network" -> round(TwtUserInfo.network_score.doubleValue).toString)

@@ -17,8 +17,10 @@ class TwitterOAuth extends ApplicationUser {
         (for{
           tkn <- S.param("oauth_token")
           vrfr <- S.param("oauth_verifier")
-        } yield useTokens(tkn, vrfr)) getOrElse <li class="btnimg"> {a(() => twitterAuthURL,
-            <img src="/classpath/images/twitter/twitter_button_3_lo.gif" alt="Twitter OAuth Button"/>)}</li>
+        } yield useTokens(tkn, vrfr)) getOrElse <li class="btnimg">
+          {a(() => twitterAuthURL,
+              <img src="/classpath/images/twitter/twitter_button_3_lo.gif" alt="Twitter OAuth Button"/>)}
+        </li>
     }
   }
 
@@ -28,7 +30,7 @@ class TwitterOAuth extends ApplicationUser {
     user.twitterAuthURL match {
 
       case (Some(url: String)) =>
-//        println("I HAVE BEEN CALLED: " + url)
+        //        println("I HAVE BEEN CALLED: " + url)
         RedirectTo(url)
 
 
@@ -55,6 +57,14 @@ class TwitterOAuth extends ApplicationUser {
     }
   }
 
-  def userLoggedIn = <span> <li><a href={"/" + user.screenName}> {user.screenName} </a> </li>
-            <li> <a href="/logout" class="last">Log Out</a> </li></span>
+  def userLoggedIn = <span>
+    <li>
+      <a href={"/" + user.screenName}>
+        {user.screenName}
+      </a>
+    </li>
+    <li>
+      <a href="/logout" class="last">Log Out</a>
+    </li>
+  </span>
 }

@@ -8,7 +8,7 @@ body {
 }
 
 h1, h2, h3 {
-    margin: 0;
+    margin: auto;
     text-transform: uppercase;
     font-weight: normal;
     color: #8CB70E;
@@ -23,6 +23,10 @@ h2 {
 }
 
 h3 {
+}
+
+ul li em {
+    color: red;
 }
 
 input {
@@ -860,5 +864,35 @@ img {
 .score {
     font-size: 18px;
     line-height: 16px
+}
+
+#influencer {
+    width: auto;
+}
+
+#influencer ul {
+    width: auto;
+    height: 60px;
+    margin-bottom: 40px;
+}
+
+#influencer li {
+    display: inline;
+    overflow: hidden;
+    float: left;
+    margin-right: 10px;
+}
+
+#influencer a {
+    text-decoration: none;
+}
+
+#influencer img {
+    margin-right: 5px;
+}
+
+#kclass {
+    margin-top: 30px;
+    padding-top:30px;
 }
 

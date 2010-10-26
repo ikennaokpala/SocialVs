@@ -53,6 +53,7 @@ class SearchSnippet {
             </a>
           </li>
         }
+        
         bind("sn", xhtml,
           "title" -> title,
           "graphTitle" -> "Graphical representation of the top influencers on topic: ",
