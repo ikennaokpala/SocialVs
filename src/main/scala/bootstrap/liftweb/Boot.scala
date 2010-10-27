@@ -64,7 +64,7 @@ class Boot {
 
     //page error handling
     LiftRules.exceptionHandler.prepend {
-      case (mode, request, ex) => RedirectResponse("/error")
+      case (mode, request, ex) =>println(mode); println(request); println(ex); RedirectResponse("/error")
     }
     // Redirect on no URL
     LiftRules.uriNotFound.prepend {

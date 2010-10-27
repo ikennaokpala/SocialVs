@@ -359,6 +359,17 @@ span {
 
 }
 
+#graph {
+   width: auto;
+    /*margin-left: 200px;*/
+    overflow: hidden;
+}
+
+#graph img{
+    float: none;
+    margin: 15px 0 0 300px;
+}
+
 /* Post */
 
 .post {
