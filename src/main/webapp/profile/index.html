@@ -6,204 +6,292 @@
 <lift:TProfile>
 <div class="container">
 
-    <h2 id="twu">Twitter User:
-        <p:name/>
-    </h2>
-    <p id="stxt">
-        <lift:SharedSnippet.smallSearchBox form="POST">
-            <ss:search/>
-            <ss:submit/>
+<h2 id="twu">Twitter User:
+    <p:name/>
+</h2>
+<p id="stxt">
+    <lift:SharedSnippet.smallSearchBox form="POST">
+        <ss:search/>
+        <ss:submit/>
 
-        </lift:SharedSnippet.smallSearchBox>
+    </lift:SharedSnippet.smallSearchBox>
+</p>
+
+<ul class="tabs">
+    <li><a href="#tab1">Influence Summary </a></li>
+    <li><a href="#tab2">Visual Analysis</a></li>
+    <li><a href="#tab3">Volume Analysis</a></li>
+    <!--<li><a href="#tab4">Next thing goes right here</a></li>-->
+</ul>
+
+
+<div class="tab_container">
+<div id="tab1" class="tab_content">
+
+    <h2>
+        <p:screen_name_anchor/>
+    </h2>
+
+    <div class="thumb">
+        <p:profile_picture/>
+    </div>
+
+    <!--<a href="#">
+        <p:profile_picture/>
+    </a>-->
+
+    <p>
+        <b>Bio:</b>
+        <p:description/>
+        <br/>
+        <b>Location:
+            <p:location/>
+            <!--, Website:
+            <p:url/>-->
+            <br/>
+            Tweets:
+            <p:statuses_count/>
+            ,
+            Following:
+            <p:friends_count/>
+            ,
+
+            Followers:
+            <p:followers_count/>
+            ,
+            Favourites :
+            <p:favourites_count/>
+            ,
+            Listed:
+            <p:listed_count/>
+
+
+        </b>
     </p>
 
-    <ul class="tabs">
-        <li><a href="#tab1">Influence Summary </a></li>
-        <li><a href="#tab2">Visual Analysis</a></li>
-        <li><a href="#tab3">Volume Analysis</a></li>
-        <!--<li><a href="#tab4">Next thing goes right here</a></li>-->
-    </ul>
+    <p id="meta">
 
+    <h2> Score Summary:</h2></p>
 
-    <div class="tab_container">
-        <div id="tab1" class="tab_content">
+    <p></p>
 
-            <h2>
-                <p:screen_name_anchor/>
-            </h2>
+    <div id="scores" align="center">
+        <div id="kscore">
 
-            <div class="thumb">
-                <p:profile_picture/>
-            </div>
-
-            <!--<a href="#">
-                <p:profile_picture/>
-            </a>-->
-
-            <p>
-                <b>Bio:</b>
-                <p:description/>
-                <br/>
-                <b>Location:
-                    <p:location/>
-                    <!--, Website:
-                    <p:url/>-->
-                    <br/>
-                    Tweets:
-                    <p:statuses_count/>
-                    ,
-                    Following:
-                    <p:friends_count/>
-                    ,
-
-                    Followers:
-                    <p:followers_count/>
-                    ,
-                    Favourites :
-                    <p:favourites_count/>
-                    ,
-                    Listed:
-                    <p:listed_count/>
-
-
-                </b>
-            </p>
-
-            <p id="meta">
-
-            <h2>Klout Score Summary:</h2></p>
-
-            <p></p>
-
-            <div id="scores" align="center">
-                <div id="kscore">
-
-                    <p:score/>
-                    <em> Klout Score</em>
-                </div>
-                <div id="kscore">
-
-                    <p:truereach/>
-                    <em> True Reach</em>
-                </div>
-                <div id="kscore">
-
-                    <p:amplification/>
-                    <em> Amplification</em>
-                </div>
-                <div id="kscore">
-
-                    <p:network/>
-                    <em> Network</em>
-                </div>
-            </div>
-
-            <p></p>
-
-            <p id="meta">
-
-            <h2>Influence matrix:
-            </h2>
-            </p>
-            <p>
-
-            <div id="influencer">
-                <h3>Influenced By:
-                </h3>
-
-                <ul>
-                    <p:influencedBy/>
-                </ul>
-            </div>
-
-
-            </p>
-            <p id="kclass">
-
-            <h3>Klout Classification:
-            </h3>
-            <p>
-            <b>Klout Class:</b>
-            <p:kclass/>
-                </p>
-            <p>
-            <b>Klout Description:</b>
-            @<p:screen_name/>
-            <p:klout_description/>
-                </p>
-            </p>
-
-            <p>
-            </p>
-
-
+            <p:score/>
+            <em> Klout Score</em>
         </div>
-        <div id="tab2" class="tab_content">
-            <h2>
-                <p:screen_name_anchor/>
-            </h2>
+        <div id="kscore">
 
-            <a href="#">
-                <p:profile_picture/>
-            </a>
-
-            <p>
-                <p:description/>
-            </p>
-            <h3>Tweets by @
-                <p:screen_name/>
-            </h3>
-            <p></p>
-
-            <p>
-            <ul>
-                <p:text/>
-            </ul>
-            </p>
-
-
-            <p></p>
+            <p:truereach/>
+            <em> True Reach</em>
         </div>
-        <div id="tab3" class="tab_content">
+        <div id="kscore">
 
-            <h2>
-                <p:screen_name_anchor/>
-            </h2>
-
-            <a href="#">
-                <p:profile_picture/>
-            </a>
-
-            <p>
-                <p:description/>
-            </p>
-            <h3>Tweets by @
-                <p:screen_name/>
-            </h3>
-            <p></p>
-
-            <p>
-            <ul>
-                <p:text/>
-            </ul>
-            </p>
-
-
-            <p></p>
+            <p:amplification/>
+            <em> Amplification</em>
         </div>
-        <div id="tab4" class="tab_content">
-            <h2>Next thing goes right here</h2>
-            <a href="#"> <img src="#" alt=""/></a>
+        <div id="kscore">
 
-            <h3><a href="#"></a></h3>
-
-            <p></p>
-
-            <p></p>
-
-            <p></p>
+            <p:network/>
+            <em> Network</em>
         </div>
     </div>
+
+    <p></p>
+
+    <p id="meta">
+
+    <h2>Influence matrix:
+    </h2>
+    </p>
+    <p id="kclass">
+
+    <h3>Klout Classification:
+    </h3>
+
+    <p>
+        <b>Klout Class:</b>
+        <p:kclass/>
+    </p>
+    <p>
+        <b>Klout Description:</b>
+        @
+        <p:screen_name/>
+        <p:klout_description/>
+    </p>
+    </p>
+    <p>
+
+    <div id="influencer">
+        <h3>Influenced By:
+        </h3>
+
+        <ul>
+            <p:influencedBy/>
+        </ul>
+    
+        <h3>Influencer Of:
+        </h3>
+
+        <ul>
+            <p:influencerOf/>
+        </ul>
+    </div>
+
+
+    </p>
+
+
+    <p>
+    </p>
+
+
+</div>
+<div id="tab2" class="tab_content">
+
+    <p>
+
+    <h2>
+        <p:screen_name_anchor/>
+    </h2>
+    <div class="thumb">
+        <p:profile_picture/>
+    </div>
+
+    <!--<a href="#">
+        <p:profile_picture/>
+    </a>-->
+    <p>
+        <b>Klout Class:</b>
+        <p:kclass/>
+        <br/>
+        <b>Klout Description:</b>
+        @
+        <p:screen_name/>
+        <p:klout_description/>
+        <br/>
+        <b> Percentile: </b>
+        <p:percentile/>
+        <!--, Website:
+        <p:url/>-->
+        <br/>
+
+
+    </p>
+
+    </p>
+    <p></p>
+
+
+    <p id="meta">
+
+    <h2>Score:
+    </h2></p>
+    <p>
+
+    <div id="scores" align="center">
+        <div id="kscore">
+
+            <p:score/>
+            <em> Klout Score</em>
+        </div>
+
+    </div>
+    </p>
+    <p id="meta">
+
+    <h2>True Reach:
+    </h2>
+    </p>
+    <p>
+
+    <div id="scores" align="center">
+        <div id="kscore">
+
+            <p:truereach/>
+            <em> True Reach</em>
+        </div>
+
+    </div>
+    </p>
+    <p id="meta">
+
+    <h2>Amplification:
+    </h2>
+    </p> <p>
+
+    <div id="scores" align="center">
+
+        <div id="kscore">
+
+            <p:amplification/>
+            <em> Amplification</em>
+        </div>
+
+    </div>
+    </p>
+
+    <p id="meta">
+
+    <h2>Network:
+    </h2>
+    </p>
+    <p>
+
+    <div id="scores" align="center">
+
+        <div id="kscore">
+
+            <p:network/>
+            <em> Network</em>
+        </div>
+    </div>
+    </p>
+
+
+    <p></p>
+</div>
+<div id="tab3" class="tab_content">
+
+    <h2>
+        <p:screen_name_anchor/>
+    </h2>
+
+    <a href="#">
+        <p:profile_picture/>
+    </a>
+
+    <p>
+        <p:description/>
+    </p>
+    <h3>Tweets by @
+        <p:screen_name/>
+    </h3>
+    <p></p>
+
+    <p>
+    <ul>
+        <p:text/>
+    </ul>
+    </p>
+
+
+    <p></p>
+</div>
+<div id="tab4" class="tab_content">
+    <h2>Next thing goes right here</h2>
+    <a href="#"> <img src="#" alt=""/></a>
+
+    <h3><a href="#"></a></h3>
+
+    <p></p>
+
+    <p></p>
+
+    <p></p>
+</div>
+</div>
 </div>
 <div style="clear: both; display: block; padding: 10px 0; text-align:center;">
 </div>

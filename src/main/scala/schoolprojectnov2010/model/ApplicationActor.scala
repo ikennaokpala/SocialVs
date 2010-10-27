@@ -33,7 +33,7 @@ object KloutCredentials {
   lazy val key = "n6aahpgj7geqespvdvsbuk7u" // Klout Application key
   lazy val req = :/("api.klout.com") / "1"
 }
-object TwitterCounterCredentials{
+object TwitterCounterCredentials {
   lazy val key = "77e1b81ea83c1c5d0c5d894fd3d5d66e"
   lazy val req = :/("api.twittercounter.com")
 }
@@ -49,14 +49,14 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          listed_count: BigDecimal, favourites_count: BigDecimal,
                          location: String, profile_image_url: String,
                          score: BigDecimal, true_reach: BigDecimal, kclass: String,
-                        klout_description: String, amplification_score: BigDecimal, network_score: BigDecimal,
-                         influencedBy: List[(String, BigDecimal)])
+                         klout_description: String, amplification_score: BigDecimal, network_score: BigDecimal,
+                         influencedBy: List[(String, BigDecimal)], percentile: BigDecimal)
 
 class ApplicationActor extends LiftActor {
-  val http = new Http
-  var request_token: Option[Token] = None
-  var access_token: Option[Token] = None
-  val httpHost = S.hostAndPath
+  private lazy val http = new Http
+  private var request_token: Option[Token] = None
+  private var access_token: Option[Token] = None
+  private val httpHost = S.hostAndPath
 
   def messageHandler = { // Lift Actors message handler
     case AuthURL =>
@@ -92,18 +92,19 @@ class ApplicationActor extends LiftActor {
           val network_score = ('network_score ! num)(kjson(0))
           val kclass = ('kclass ! str)(kjson(0))
           val klout_description = ('description ! str)(kjson(0))
-           lazy val influencedBy = {
-             try{
-             val influencer = for{
-              influencerList <- http(reqInfluencedBy ># {'users ! list}) flatten {'influencers ! list}
-              screen_name = ('twitter_screen_name ! str)(influencerList)
-              kscore = ('kscore ! num)(influencerList)
-            } yield (screen_name, kscore)
-           //  println("I am looking for you "+influencer)
-            influencer
-             }catch{
-               case _ => List()
-             }
+          val percentile = ('percentile ! num)(kjson(0))
+          lazy val influencedBy = {
+            try {
+              val influencer = for{
+                influencerList <- http(reqInfluencedBy ># {'users ! list}) flatten {'influencers ! list}
+                screen_name = ('twitter_screen_name ! str)(influencerList)
+                kscore = ('kscore ! num)(influencerList)
+              } yield (screen_name, kscore)
+              //  println("I am looking for you "+influencer)
+              influencer
+            } catch {
+              case _ => List()
+            }
           }
 
           /*val influencerOf  = {
@@ -116,7 +117,6 @@ class ApplicationActor extends LiftActor {
           }*/
 
           val twt1 = for{
-
             twtJsonList <- http(Status(screenName).timeline)
             Status.user.screen_name(screen_name) = twtJsonList
             Status.text(text) = twtJsonList
@@ -131,15 +131,12 @@ class ApplicationActor extends LiftActor {
             name = ExtUser.name(user)
             location = ExtUser.location(user)
             description = ExtUser.description(user)
-
-
-
           } yield TwitterUserVO(id, name, screenName,
               description, text, statuses_count, friends_count,
               followers_count, listed_count, favourites_count,
               location, profile_image_url, score, true_reach, kclass, klout_description,
-              amplification_score, network_score, influencedBy)
-          println("this is my id: "+twt1(0).id)
+              amplification_score, network_score, influencedBy, percentile)
+          println("this is my id: " + twt1(0).id)
           twt1
 
         }

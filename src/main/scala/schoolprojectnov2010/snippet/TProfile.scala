@@ -10,6 +10,8 @@ import schoolprojectnov2010.model.TwitterUserVO
 
 class TProfile extends ApplicationUser {
   val screenName = S.param("screenName")
+  val width = 300
+  val height = 225
 
   def render(xhtml: NodeSeq): NodeSeq =
     user.authorized match {
@@ -23,6 +25,9 @@ class TProfile extends ApplicationUser {
         val text = TwtInfoList map (n => <li>
           {n.text}
         </li>)
+        val influencerOfDetails = <li>
+          <em>Oops !! This information is not available at the moment..</em>
+        </li>
         val influencedByDetails = {
           TwtUserInfo.influencedBy match {
             case x :: rest => TwtUserInfo.influencedBy map {
@@ -34,7 +39,9 @@ class TProfile extends ApplicationUser {
 
                 </li>
             }
-            case _ =>  <li><em>Oops !! This information is not available at the moment..</em></li>
+            case _ => <li>
+              <em>Oops !! This information is not available at the moment..</em>
+            </li>
           }
         }
         bind("p", xhtml,
@@ -46,6 +53,7 @@ class TProfile extends ApplicationUser {
             {TwtUserInfo.screenName}
           </a>,
           "influencedBy" -> influencedByDetails,
+          "influencerOf" -> influencerOfDetails,
           "favourites_count" -> TwtUserInfo.favourites_count.toString,
           "listed_count" -> TwtUserInfo.listed_count.toString,
           "text" -> text,
@@ -55,6 +63,7 @@ class TProfile extends ApplicationUser {
           "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>,
           "friends_count" -> TwtUserInfo.friends_count.toString,
           "score" -> round(TwtUserInfo.score.doubleValue).toString,
+          "percentile" -> TwtUserInfo.percentile.toString,
           "kclass" -> TwtUserInfo.kclass,
           "klout_description" -> TwtUserInfo.klout_description,
           "truereach" -> round(TwtUserInfo.true_reach.doubleValue).toString,
@@ -68,6 +77,8 @@ class TProfile extends ApplicationUser {
           "description" -> "",
           "screen_name" -> "",
           "screen_name_anchor" -> "",
+          "influencedBy" -> "",
+          "influencerOf" -> "",
           "favourites_count" -> "",
           "listed_count" -> "",
           "text" -> "",
@@ -77,6 +88,7 @@ class TProfile extends ApplicationUser {
           "profile_picture" -> "",
           "friends_count" -> "",
           "score" -> "",
+          "percentile" -> "",
           "truereach" -> "",
           "amplification" -> "",
           "network" -> "")
@@ -98,5 +110,16 @@ class TProfile extends ApplicationUser {
       You need to login to used this application
     </h2>
   </center>
+
+  def googleChartURL(data: List[Int], bar_labels: List[String]) = "http://chart.apis.google.com/chart?" + List(
+    "chxt=x,y",
+    "chxl=0:|" + bar_labels.mkString("|"),
+    "chs=%dx%d".format(width, height),
+    "cht=bvg",
+    "chco=A2C180",
+    "chd=t:" + data.mkString(",")).mkString("&")
+
+  //   def google(xhtml: NodeSeq) = <img src="" width={width} height={height} alt="graph"/>
+
 
 }

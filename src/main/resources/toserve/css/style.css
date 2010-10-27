@@ -449,7 +449,10 @@ span {
 .post .links {
     display: block;
     width: 120px;
-    height: 18px;
+    height: 18px;                <p id="kclass">
+
+            <h3>Klout Classification:
+            </h
     margin: 0px;
     padding: 3px 0px 0px 40px;
     background: #546E09;
@@ -892,7 +895,7 @@ img {
 }
 
 #kclass {
-    margin-top: 30px;
-    padding-top:30px;
+    margin-top: 0px;
+    padding-top: 0px;
 }
 
