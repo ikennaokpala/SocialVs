@@ -63,6 +63,11 @@ ul, ol {
 blockquote {
 }
 
+img {
+    margin: 0px, 0px, 0px, 0px;
+    padding: 0px, 0px, 0px, 0px;
+}
+
 a {
     color: #546E09;
 }
@@ -360,16 +365,16 @@ span {
 }
 
 #graph {
-   width: auto;
-    /*margin-left: 200px;*/
+    width: auto; /*margin-left: 200px;*/
     overflow: hidden;
 }
 
-#graph img{
+#graph img {
     float: none;
     margin: 15px 0 0 300px;
 }
-#graph .ometer{
+
+#graph .ometer {
     float: none;
     margin: 15px 0 0 0;
 }
@@ -464,11 +469,8 @@ span {
 .post .links {
     display: block;
     width: 120px;
-    height: 18px;                <p id="kclass">
-
-            <h3>Klout Classification:
-            </h
-    margin: 0px;
+    height: 18px;
+    < p id = "kclass" > < h3 > Klout Classification: < / h margin: 0px;
     padding: 3px 0px 0px 40px;
     background: #546E09;
     text-decoration: none;

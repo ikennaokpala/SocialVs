@@ -143,7 +143,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
     "cht=gm",
     "chd=t:" + data,
     //    "chdl=" + bar_label,
-    "chl=Influence").mkString("&") // returns Google vizualisation chart bar graph
+    "chl=Influence").mkString("&") // returns Google vizualisation google o meter
 
   def googleVizBarChartURL(data: List[Double], bar_label: List[String]) = "http://chart.apis.google.com/chart?" + List(
     //    "chxr=0,0," + data.max + 10,
@@ -162,6 +162,6 @@ class TProfile extends ApplicationUser { // TProfile class definition
     "chs=100x100",
     "cht=qr",
     "chld=|0",
-    "chl=Twitter Username: @%s+Klout Score: %f".format(user, kscore)).mkString("&") // returns Google vizualisation chart QR Code bar code image
+    "chl=Twitter Username: @%s\n+Klout Score: %d\n".format(user, kscore.toInt)).mkString("&") // returns Google vizualisation chart QR Code bar code image
   //"chl=Twitter Username: @%d+Klout Score: %d+TrueReach: %d+Amplification: %d+ Network:%d").format(user, kscore, truereach, amp, net)).mkString("&")
 }
