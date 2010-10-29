@@ -1,5 +1,14 @@
 package schoolprojectnov2010.model
 
+/**
+ * Created by IntelliJ IDEA.
+ * User: ikennaokpala
+ * Date: Sep 8, 2010
+ * Time: 1:21:51 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+
 import net.liftweb.actor._
 import dispatch._
 import json._
@@ -9,40 +18,40 @@ import twitter._
 import net.liftweb.http.S
 
 
-trait ExtUserProps extends UserProps with Js {
-  val id = 'id ! num
-  val listed_count = 'listed_count ! num
-  val favourites_count = 'favourites_count ! num
-  val url = 'url ! str
-  val friends_count = 'friends_count ! num
-  val profile_image_url = 'profile_image_url ! str
-  val name = 'name ! str
-  val description = 'description ! str
-  val location = 'location ! str
-  val statuses_count = 'statuses_count ! num
+trait ExtUserProps extends UserProps with Js {   // ExtUserProps extending  UserProps and  Js ofrom the databinder dispatch library
+  val id = 'id ! num // SymOp extractor for twitter user id `
+  val listed_count = 'listed_count ! num // SymOp extractor for twitter user list count
+  val favourites_count = 'favourites_count ! num // SymOp extractor for twitter user favourites count
+  val url = 'url ! str // SymOp extractor for twitter user url ( notes this may throw a runtime extractor  exception)
+  val friends_count = 'friends_count ! num   // SymOp extractor for twitter user friends count
+  val profile_image_url = 'profile_image_url ! str  // SymOp extractor for twitter user image url
+  val name = 'name ! str // SymOp extractor for twitter user screen name
+  val description = 'description ! str // SymOp extractor for twitter user bio description
+  val location = 'location ! str // SymOp extractor for twitter user location
+  val statuses_count = 'statuses_count ! num  // SymOp extractor for twitter user statuses count
 }
-object ExtUser extends ExtUserProps with Js
+object ExtUser extends ExtUserProps with Js  //  ExtUser inherits SymOp extractor for twitter user from ExtUserProps and Js
 
-object TwitterCredentials {
-  lazy val consumerKey = "ZbjvoQtqD56WzVGsJYYqzw" // OAuth application key, top-secret
-  lazy val consumerSecret = "plgoNIGZOic9keO4BEHZ3aHRdRC6N0JJMGJPOpg"
-  lazy val consumer = Consumer(consumerKey, consumerSecret)
+object TwitterCredentials {  // twitter api credentials singleton object
+  lazy val consumerKey = "ZbjvoQtqD56WzVGsJYYqzw" // OAuth application consumer key, top-secret lazily evaluated
+  lazy val consumerSecret = "plgoNIGZOic9keO4BEHZ3aHRdRC6N0JJMGJPOpg" // OAuth application consumer Secret lazily evaluated
+  lazy val consumer = Consumer(consumerKey, consumerSecret)  // composing Oauth  application consumer key, top-secret lazily evaluated
 }
 
-object KloutCredentials {
+object KloutCredentials { // klout api credentials singleton object
   lazy val key = "n6aahpgj7geqespvdvsbuk7u" // Klout Application key
-  lazy val req = :/("api.klout.com") / "1"
+  lazy val req = :/("api.klout.com") / "1"   // Klout request uri
 }
-object TwitterCounterCredentials {
+object TwitterCounterCredentials { // TwitterCounter api credentials singleton object
   lazy val key = "77e1b81ea83c1c5d0c5d894fd3d5d66e"
   lazy val req = :/("api.twittercounter.com")
 }
 
-case object AuthURL
-case class OAuthResponse(verifier: String)
-case class Tweets(screenName: String)
-case class InfluencersSearch(searchInput: String)
-case class KloutUser(user_name: String, score: BigDecimal, picture: String, topic: String)
+case object AuthURL  // case object to obtain OAuth-thentication URL
+case class OAuthResponse(verifier: String) // OAuth-thentication  Responce case class
+case class TwitteruserInfo(screenName: String) // twitter users information
+case class InfluencersSearch(searchInput: String) // topic or key word search case class
+case class KloutUserVO(user_name: String, score: BigDecimal, picture: String, topic: String) // Klout User Data Transfer Object  
 case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          description: String, text: String, statuses_count: BigDecimal,
                          friends_count: BigDecimal, followers_count: BigDecimal,
@@ -50,13 +59,13 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          location: String, profile_image_url: String,
                          score: BigDecimal, true_reach: BigDecimal, kclass: String,
                          klout_description: String, amplification_score: BigDecimal, network_score: BigDecimal,
-                         influencedBy: List[(String, BigDecimal)], percentile: BigDecimal)
+                         influencedBy: List[(String, BigDecimal)], percentile: BigDecimal) // Twitter and  Klout user Data Transfer Object
 
-class ApplicationActor extends LiftActor {
-  private lazy val http = new Http
-  private var request_token: Option[Token] = None
-  private var access_token: Option[Token] = None
-  private val httpHost = S.hostAndPath
+class ApplicationActor extends LiftActor { // Aplication actor inherit capabilities from Lift'sActor library
+  private lazy val http = new Http   //  databinder dispatch Http instance  lazily evaluated
+  private var request_token: Option[Token] = None // request token Option type
+  private var access_token: Option[Token] = None  // access token Option type
+  private val httpHost = S.hostAndPath // this get the current Host url 
 
   def messageHandler = { // Lift Actors message handler
     case AuthURL =>
@@ -78,32 +87,38 @@ class ApplicationActor extends LiftActor {
 
       reply(Some(accessToken._3))
 
-    case Tweets(screenName) =>
+    case TwitteruserInfo(screenName) =>
 
       try {
-        lazy val reqScore = KloutCredentials.req / "users" / "show.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
-        lazy val reqInfluencedBy = KloutCredentials.req / "soi" / "influenced_by.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
-        lazy val reqInfluencerOf = KloutCredentials.req / "soi" / "influenced_of.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)
-        val twt = {
-          val kjson = http(reqScore ># {'users ! list}) map {'score ! obj}
-          val score = ('kscore ! num)(kjson(0))
-          val true_reach = ('true_reach ! num)(kjson(0))
-          val amplification_score = ('amplification_score ! num)(kjson(0))
-          val network_score = ('network_score ! num)(kjson(0))
-          val kclass = ('kclass ! str)(kjson(0))
-          val klout_description = ('description ! str)(kjson(0))
-          val percentile = ('percentile ! num)(kjson(0))
-          lazy val influencedBy = {
-            try {
-              val influencer = for{
-                influencerList <- http(reqInfluencedBy ># {'users ! list}) flatten {'influencers ! list}
-                screen_name = ('twitter_screen_name ! str)(influencerList)
-                kscore = ('kscore ! num)(influencerList)
-              } yield (screen_name, kscore)
+        lazy val reqScore = KloutCredentials.req / "users" / "show.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName) // Klout User request end point Url
+        lazy val reqInfluencedBy = KloutCredentials.req / "soi" / "influenced_by.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName)  // Klout User influencedBy end point Url
+        lazy val reqInfluencerOf = KloutCredentials.req / "soi" / "influenced_of.json" <<? Map("key" -> KloutCredentials.key, "users" -> screenName) // Klout User influencedOf end point Url
+        lazy val reqTwitterUserId = User(screenName).show  // Twitter user  end point Url and Json parser handler 
+        val twitterUserDTO = {    // twitter data transfer object
+          val kjson = http(reqScore ># {'users ! list}) map {'score ! obj}  // handling the reqScore as JSON,  taking what i want
+          val score = ('kscore ! num)(kjson(0)) // Extracting Klout score with the SymOp kscore
+          val true_reach = ('true_reach ! num)(kjson(0)) // Extracting truereach with the SymOp true_reach
+          val amplification_score = ('amplification_score ! num)(kjson(0)) // Extracting amplification score with the SymOp amplification_score
+          val network_score = ('network_score ! num)(kjson(0))  // Extracting network score with the SymOp network_score
+          val kclass = ('kclass ! str)(kjson(0)) // Extracting klout class  with the SymOp kclass
+          val klout_description = ('description ! str)(kjson(0)) // Extracting klout class description with the SymOp description
+          val percentile = ('percentile ! num)(kjson(0)) // Extracting klout user percentile  with the SymOp percentile
+        /*  val twitterUser = http(reqTwitterUserId)  // handling the reqTwitterUserId as JSON,  taking what i want
+          val twitterUserId = ('id ! num)(twitterUserObj) // Extracting twitterUserId  with the SymOp kscore
+          lazy val reqTc = TwitterCounterCredentials.req <<? Map("apikey" -> TwitterCounterCredentials.key, "twitter_id" -> twitterUserId)// Twitter Counter User request end point Url
+          val followersPerDate = http(reqTc ># {'followersperdate ! obj}) // handling the reqTc as JSON,  taking followersperdate as an obj
+          val g = followersPerDate*/
+          lazy val influencedBy = {  //  influencedBy variable  lazily evaluated
+            try {     // exception
+              val influencer = for{ // for conmprehension
+                influencerList <- http(reqInfluencedBy ># {'users ! list}) flatten {'influencers ! list}  // handling the reqTwitterUserId as JSON,  taking what i want
+                screen_name = ('twitter_screen_name ! str)(influencerList) // Extracting screen_name  with the SymOp twitter_screen_name
+                kscore = ('kscore ! num)(influencerList) // Extracting screen_name  with the SymOp kscore
+              } yield (screen_name, kscore) // yield creates a new list of tuple2 string and BigDecimal
               //  println("I am looking for you "+influencer)
               influencer
-            } catch {
-              case _ => List()
+            } catch { // exception trap
+              case _ => List() // return an empty list
             }
           }
 
@@ -112,64 +127,64 @@ class ApplicationActor extends LiftActor {
               influencerList <- http(reqInfluencerOf ># {'users ! list}) flatten {'influencers ! list}
               screen_name = ('influencer ! str)(influencerList)
               kscore = ('kscore ! num)(influencerList)
-            } yield (screen_name, kscore) 
+            } yield (screen_name, kscore)
             influencer
           }*/
 
-          val twt1 = for{
-            twtJsonList <- http(Status(screenName).timeline)
-            Status.user.screen_name(screen_name) = twtJsonList
-            Status.text(text) = twtJsonList
-            Status.user.followers_count(followers_count) = twtJsonList
-            Status.user(user) = twtJsonList
-            id = ExtUser.id(user)
-            statuses_count = ExtUser.statuses_count(user)
-            friends_count = ExtUser.friends_count(user)
-            listed_count = ExtUser.listed_count(user)
-            favourites_count = ExtUser.favourites_count(user)
-            profile_image_url = ExtUser.profile_image_url(user)
-            name = ExtUser.name(user)
-            location = ExtUser.location(user)
-            description = ExtUser.description(user)
+          val twitterUserObj = for{// for comprehension
+            twtJsonList <- http(Status(screenName).timeline)  // handling the Status reponse as JSON,  taking what i want
+            Status.user.screen_name(screen_name) = twtJsonList  // handling the Status reponse as JSON,  taking what i want
+            Status.text(text) = twtJsonList      // handling the Status reponse as JSON,  taking what i want
+            Status.user.followers_count(followers_count) = twtJsonList  // handling the Status reponse as JSON,  taking what i want
+            Status.user(user) = twtJsonList     // handling the Status reponse as JSON,  taking what i want
+            id = ExtUser.id(user)        // handling the Status reponse as JSON,  taking what i want
+            statuses_count = ExtUser.statuses_count(user)    // handling the Status reponse as JSON,  taking what i want
+            friends_count = ExtUser.friends_count(user) // handling the Status reponse as JSON,  taking what i want
+            listed_count = ExtUser.listed_count(user)   // handling the Status reponse as JSON,  taking what i want
+            favourites_count = ExtUser.favourites_count(user)  // handling the Status reponse as JSON,  taking what i want
+            profile_image_url = ExtUser.profile_image_url(user)  // handling the Status reponse as JSON,  taking what i want
+            name = ExtUser.name(user)         // handling the Status reponse as JSON,  taking what i want
+            location = ExtUser.location(user)   // handling the Status reponse as JSON,  taking what i want
+            description = ExtUser.description(user)  // handling the Status reponse as JSON,  taking what i want
           } yield TwitterUserVO(id, name, screenName,
               description, text, statuses_count, friends_count,
               followers_count, listed_count, favourites_count,
               location, profile_image_url, score, true_reach, kclass, klout_description,
               amplification_score, network_score, influencedBy, percentile)
-          println("this is my id: " + twt1(0).id)
-          twt1
+          println("Current user\'s id: " + twitterUserObj(0).id)  // yield creates a new list of TwitterUserVO
+          twitterUserObj
 
         }
-        reply(twt)
+        reply(twitterUserDTO) // replying back to caller the twitterUserDTO
       } catch {
 
-        case ex => println(ex); reply((None, screenName))
+        case ex => println(ex); reply((None, screenName))  // replying back to caller tuple2 of Option and String
       }
 
     case InfluencersSearch(searchInput) =>
 
       try {
 
-        val searchresult = {
-          val req = KloutCredentials.req / "topics" / "search.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput)
-          val kuser = for{
+        val searchresult = {   //  searchresult variable 
+          val req = KloutCredentials.req / "topics" / "search.json" <<? Map("key" -> KloutCredentials.key, "topic" -> searchInput) // Klout Topic request end point Url
+          val kuser = for{   // for comprehension
             json <- http(req ># {
               'users ! list
 
-            })
-            user_name = ('user_name ! str)(json)
-            score = ('skore ! num)(json)
-            picture = ('pic_url ! str)(json)
-          } yield KloutUser(user_name, score, picture, searchInput)
+            })   // processing topic request
+            user_name = ('user_name ! str)(json)  // Extracting twitter user name via  Klout with the SymOp user_name
+            score = ('skore ! num)(json) // Extracting Klout user score with the SymOp skore
+            picture = ('pic_url ! str)(json) // Extracting twitter image via  Klout with the SymOp pic_url
+          } yield KloutUserVO(user_name, score, picture, searchInput) // yield creates a new list of KloutUserVO
           kuser
         }
 
-        reply(searchresult)
+        reply(searchresult)  // replying back to caller the searchresult
       } catch {
-        case ex => reply((None, None))
+        case ex => reply((None, None)) // replying back to caller tuple2 of Option and Option
       }
 
-    case _ => println("unkown message")
+    case _ => println("unkown message")  // printing to console some unknown message
 
   }
 

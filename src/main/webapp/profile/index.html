@@ -19,8 +19,8 @@
 
 <ul class="tabs">
     <li><a href="#tab1">Influence Summary </a></li>
-    <li><a href="#tab2">Visual Analysis</a></li>
-    <li><a href="#tab3">Volume Analysis</a></li>
+    <li><a href="#tab2">Visual Summary</a></li>
+    <li><a href="#tab3">Volume Summary</a></li>
     <!--<li><a href="#tab4">Next thing goes right here</a></li>-->
 </ul>
 
@@ -130,7 +130,7 @@
         <ul>
             <p:influencedBy/>
         </ul>
-    
+
         <h3>Influencer Of:
         </h3>
 
@@ -155,10 +155,15 @@
     <h2>
         <p:screen_name_anchor/>
     </h2>
-    <div class="thumb">
-        <p:qrcodegraph/>
-    </div>
 
+    <!--<div class="thumb">
+        <p:profile_picture/>
+    </div>-->
+    <!-- <div id="scores" align="center">
+   <div id="kscore">-->
+    <p:qrcodegraph/>
+    <!-- </div>
+    </div>-->
     <!--<a href="#">
         <p:profile_picture/>
     </a>-->
@@ -183,43 +188,61 @@
     </p>
     <p></p>
 
+    <p></p>
+
+    <p></p>
+
 
     <p id="meta">
 
-    <h2>Klout Score: <p:score/>
-    </h2></p>
-    <p>
-
-      <p id="graph"> <p:scoregraph/> </p>
-    </p>
-
-    <p id="meta">
-
-    <h2>True Reach Score: <p:truereach/>
+    <h2>Klout Score:
+        <p:score/>
     </h2>
     </p>
     <p>
 
-       <p id="graph"> <p:truereachgraph/> </p>
+    <p id="graph">
+        <p:scoregraph/>
+    </p>
+    </p>
+
+    <p id="meta">
+
+    <h2>True Reach Score:
+        <p:truereach/>
+    </h2>
+    </p>
+    <p>
+
+    <p id="graph">
+        <p:truereachgraph/>
+    </p>
     </p>
     <p id="meta">
 
-    <h2>Amplification: <p:amplification/>
+    <h2>Amplification:
+        <p:amplification/>
     </h2>
     </p> <p>
 
-           <p id="graph"> <p:ampgraph/> </p>
+    <p id="graph">
+        <p:ampgraph/>
+    </p>
     </p>
 
     <p id="meta">
 
-    <h2>Network Score: <p:network/>
+    <h2>Network Score:
+        <p:network/>
     </h2>
     </p>
     <p>
-          <p id="graph"> <p:networkgraph/> </p>
-   
-    </p>  
+
+    <p id="graph">
+        <p:networkgraph/>
+    </p>
+
+    </p>
 
 
     <p></p>

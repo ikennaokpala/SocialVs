@@ -15,36 +15,35 @@ import net.liftweb._
 import http.js._
 import http._
 
-object Influencer extends SessionVar[Any]()
-object searchObj extends RequestVar[String]("")
+object Influencer extends SessionVar[Any]()  // influencer singleton object
+object searchObj extends RequestVar[String]("") // search singletion object
 
-class SharedSnippet extends ApplicationUser {
-    var search = ""
-    import SHtml._
+class SharedSnippet extends ApplicationUser { // SharedSnippet extends ApplicationUser Class
+    var search = "" // search variable
+    import SHtml._    // Library imports into local class scope
     import JsCmds._
     import JE._
     import JsCmds.Alert
-    def render(xhtml: NodeSeq): NodeSeq = {
+    def render(xhtml: NodeSeq): NodeSeq = {    // render method definition
 
-        bind("ss", xhtml,
-            "search" -> text(searchObj.is, searchObj(_), "id" -> "search"),
+        bind("ss", xhtml,          // bind helper
+            "search" -> text(searchObj.is, searchObj(_), "id" -> "search"), // search text field
             "submit" -> submit(S.?("Search"), () => doSearch(searchObj.is), "id" -> "btn", "onclick" ->
-                    JsIf(JsEq(ValById("search"), ""), Alert("You are expected to provide a topic or keyword") & JsReturn(false))))
+                    JsIf(JsEq(ValById("search"), ""), Alert("You are expected to provide a topic or keyword") & JsReturn(false)))) // submit button with javascript validation
     }
 
-    def smallSearchBox(xhtml: NodeSeq): NodeSeq = {
-
+    def smallSearchBox(xhtml: NodeSeq): NodeSeq = {   // render method definition
         bind("ss", xhtml,
-            "search" -> text(search, search = _, "id" -> "smallbox"),
+            "search" -> text(search, search = _, "id" -> "smallbox"), // search text field
             "submit" -> submit(S.?("Go"), () => S.redirectTo("/" + search), "id" -> "smallboxbtn", "onclick" ->
                     JsIf(JsEq(ValById("smallbox"), ""),
-                        Alert("You are expected to provide a twitter user name") & JsReturn(false))))
+                        Alert("You are expected to provide a twitter user name") & JsReturn(false))))   // submit button with javascript validation
     }
 
-    def doSearch(searchInput: String) = {
-        val influencerList = user.topicInfluencersSearch(searchInput)
-        Influencer set (influencerList)
-        S.redirectTo("/search/index")
+    def doSearch(searchInput: String) = {  // topic search operation  method
+        val influencerList = user.topicInfluencersSearch(searchInput) // method call to topicInfluencersSearch which returns List of Any
+        Influencer set (influencerList)   // setting the Influencer session object with InfluencerList
+        S.redirectTo("/search/index")  // redirecting to search index page which automatically invokes the render method for Search snippet
 
     }
 

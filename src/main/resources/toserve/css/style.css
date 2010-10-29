@@ -369,6 +369,10 @@ span {
     float: none;
     margin: 15px 0 0 300px;
 }
+#graph .ometer{
+    float: none;
+    margin: 15px 0 0 0;
+}
 
 /* Post */
 
