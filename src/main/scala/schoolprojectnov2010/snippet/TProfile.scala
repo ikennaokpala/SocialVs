@@ -78,7 +78,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
           "truereach" -> round(TwtUserInfo.true_reach.doubleValue).toString, // twitter user's true reach
           "amplification" -> round(TwtUserInfo.amplification_score.doubleValue).toString, // twitter user's amplification score
           "network" -> round(TwtUserInfo.network_score.doubleValue).toString, // twitter user's networki score
-          "scoregraph" -> <img src={googleVizGroovyChartURL(round(TwtUserInfo.score.doubleValue), TwtUserInfo.screenName)} alt="graph"/>, // Klout Score bar graph
+          "scoregraph" -> <img src={googleVizGroovyChartURL(round(TwtUserInfo.score.doubleValue), TwtUserInfo.screenName)} width="300" height="150" alt="graph"/>, // Klout Score bar graph
           "truereachgraph" -> <img src={googleVizBarChartURL(List(round(TwtUserInfo.true_reach.doubleValue)), List(TwtUserInfo.screenName))} width={width.toString} height={height.toString} alt="graph"/>, // Klout true reach bar graph
           "ampgraph" -> <img src={googleVizBarChartURL(List(round(TwtUserInfo.amplification_score.doubleValue)), List(TwtUserInfo.screenName))} width={width.toString} height={height.toString} alt="graph"/>, // Klout amplification score bar graph
           "networkgraph" -> <img src={googleVizBarChartURL(List(round(TwtUserInfo.network_score.doubleValue)), List(TwtUserInfo.screenName))} width={width.toString} height={height.toString} alt="graph"/>, // Klout network score bar graph
@@ -133,15 +133,19 @@ class TProfile extends ApplicationUser { // TProfile class definition
   </center>
 
   def googleVizGroovyChartURL(data: Double, bar_label: String) = "http://chart.apis.google.com/chart?" + List(
-    "chxl=0:|Low|Moderate|High",
+    "chtt=Influence+Meter+for+@"+ bar_label,
+    "chts=000000,10",
+    "chxt=x,y",
+    "chxl=0:|Low|High",
     "chxt=y",
     "chs=300x150",
+//    "chma=10px,10px,10px,10px|0,0",
     "cht=gm",
     "chd=t:" + data,
-    "chdl=" + bar_label,
+    //    "chdl=" + bar_label,
     "chl=Influence").mkString("&") // returns Google vizualisation chart bar graph
 
-  def googleVizBarChartURL(data:List[Double], bar_label: List[String]) = "http://chart.apis.google.com/chart?" + List(
+  def googleVizBarChartURL(data: List[Double], bar_label: List[String]) = "http://chart.apis.google.com/chart?" + List(
     //    "chxr=0,0," + data.max + 10,
     "chxt=x,y",
     "chbh=41,0,240",
