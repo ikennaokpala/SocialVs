@@ -20,6 +20,8 @@ class Boot {
       "Home")) ::
             Menu(Loc("search", List("search", "index"),
               "Search", Hidden)) ::
+            Menu(Loc("search2", List("search", "index2"),
+              "Search2", Hidden)) ::
             Menu(Loc("profile", List("profile", "index"),
               "Profile", Hidden)) ::
             Menu(Loc("logout", List("logout", "logout"), "logout", Hidden)) ::
@@ -64,7 +66,7 @@ class Boot {
 
     //page error handling
     LiftRules.exceptionHandler.prepend {
-      case (mode, request, ex) =>println(mode); println(request); println(ex); RedirectResponse("/error")
+      case (mode, request, ex) => println(mode); println(request); println(ex); RedirectResponse("/error")
     }
     // Redirect on no URL
     LiftRules.uriNotFound.prepend {

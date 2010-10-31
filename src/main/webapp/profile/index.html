@@ -12,17 +12,17 @@
 </h2>
 <p id="stxt">
     <span>Type Twitter Username.</span>
-    <lift:SharedSnippet.smallSearchBox form="POST">
+    <lift:SharedSnippet.twitterUserSearchBox form="POST">
         <ss:search/>
         <ss:submit/>
 
-    </lift:SharedSnippet.smallSearchBox>
+    </lift:SharedSnippet.twitterUserSearchBox>
 </p>
 
 <ul class="tabs">
     <li><a href="#tab1">Influence Summary </a></li>
     <li><a href="#tab2">Visual Summary</a></li>
-    <li><a href="#tab3">Volume Summary</a></li>
+    <li><a href="#tab3">Tweets</a></li>
     <!--<li><a href="#tab4">Next thing goes right here</a></li>-->
 </ul>
 
@@ -147,8 +147,6 @@
 
     <p>
     </p>
-
-
 </div>
 <div id="tab2" class="tab_content">
 
@@ -189,65 +187,67 @@
 
     </p>
     <p></p>
-
-    <p></p>
-
-    <p></p>
-
-
-    <p id="meta">
+  <p id="meta">
 
     <h2>Klout Score:
         <p:score/>
     </h2>
     </p>
-    <p>
+    <!--<div id="percentile" align="left">
 
-    <p id="graph">
-        <p:scoregraph/>
-    </p>
-    </p>
+    <div class="score">
 
-    <p id="meta">
+        <p:percentile/> <span>th</span>
+        <em> Percentile</em>
+    </div>
+</div>    -->      
+<p>
 
-    <h2>True Reach Score:
-        <p:truereach/>
-    </h2>
-    </p>
-    <p>
+<p id="graph">
+    <p:scoregraph/>
+</p>
+</p>
 
-    <p id="graph">
-        <p:truereachgraph/>
-    </p>
-    </p>
-    <p id="meta">
+<p id="meta">
 
-    <h2>Amplification:
-        <p:amplification/>
-    </h2>
-    </p> <p>
+<h2>True Reach Score:
+    <p:truereach/>
+</h2>
+</p>
+<p>
 
-    <p id="graph">
-        <p:ampgraph/>
-    </p>
-    </p>
+<p id="graph">
+    <p:truereachgraph/>
+</p>
+</p>
+<p id="meta">
 
-    <p id="meta">
+<h2>Amplification:
+    <p:amplification/>
+</h2>
+</p> <p>
 
-    <h2>Network Score:
-        <p:network/>
-    </h2>
-    </p>
-    <p>
+<p id="graph">
+    <p:ampgraph/>
+</p>
+</p>
 
-    <p id="graph">
-        <p:networkgraph/>
-    </p>
+<p id="meta">
 
-    </p>
+<h2>Network Score:
+    <p:network/>
+</h2>
+</p>
+<p>
+
+<p id="graph">
+    <p:networkgraph/>
+</p>
+
+</p>
 
 
-    <p></p>
+<p></p>
 </div>
 <div id="tab3" class="tab_content">
 
