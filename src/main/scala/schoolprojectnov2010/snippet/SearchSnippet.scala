@@ -32,7 +32,7 @@ class SearchSnippet {     // class   SearchSnippet
     //  title lazily evaluated
   private lazy val title = <b>According to
     <a href="http://www.klout.com">Klout</a>
-    the following are the top 50 influencers on topic:</b>
+    the following are the top {sortedInfluencerList.length} influencers on topic:</b>
 
   def render(xhtml: NodeSeq): NodeSeq = {  // default page load method 
     Influencer.is match {
