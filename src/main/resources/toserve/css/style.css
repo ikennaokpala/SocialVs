@@ -54,7 +54,14 @@ p, ul, ol {
 p h1 {
     color: red;
     text-transform: none;
-    margin-bottom: -100px;
+    margin-bottom: 10px;
+}
+
+p span em {
+    color: red;
+    text-transform: none;
+    margin-bottom:0px;
+    margin-top:0px;
 }
 
 ul, ol {
@@ -64,8 +71,8 @@ blockquote {
 }
 
 img {
-    margin: 0px, 0px, 0px, 0px;
-    padding: 0px, 0px, 0px, 0px;
+    /*margin: 0px, 0px, 0px, 0px;
+    padding: 0px, 0px, 0px, 0px;*/
 }
 
 a {

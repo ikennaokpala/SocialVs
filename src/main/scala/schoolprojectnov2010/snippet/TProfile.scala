@@ -86,7 +86,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
 
         case _ => val tprofileTuple = tprofile.asInstanceOf[Tuple2[Option[String], String]] // casting List of Any toTuple2 of Option of string and string
         bind("p", xhtml, // bind helper returns xml node sequence
-          "error" -> (tprofileTuple._2 + " is not a valid twitter user !!"), // returns twitter user screen name appedded to a message string 
+          "error" -> <p> <span> <em> "The twitter username "+{tprofileTuple._2}+ " may not have been processed before now by klout !!"</em> </span> </p>, // returns twitter user screen name appedded to a message string 
           "name" -> "", // returns an Empty String
           "description" -> "", // returns an Empty String
           "screen_name" -> "", // returns an Empty String
@@ -103,6 +103,8 @@ class TProfile extends ApplicationUser { // TProfile class definition
           "friends_count" -> "", // returns an Empty String
           "score" -> "", // returns an Empty String
           "percentile" -> "", // returns an Empty String
+          "kclass" -> "", // returns an Empty String
+          "klout_description" -> "", // returns an Empty String
           "truereach" -> "", // returns an Empty String
           "amplification" -> "", // returns an Empty String
           "network" -> "", // returns an Empty String
@@ -133,13 +135,13 @@ class TProfile extends ApplicationUser { // TProfile class definition
   </center>
 
   def googleVizGroovyChartURL(data: Double, bar_label: String) = "http://chart.apis.google.com/chart?" + List(
-    "chtt=Influence+Meter+for+@"+ bar_label,
+    "chtt=Influence+Meter+for+@" + bar_label,
     "chts=000000,10",
     "chxt=x,y",
     "chxl=0:|Low|High",
     "chxt=y",
     "chs=300x150",
-//    "chma=10px,10px,10px,10px|0,0",
+    //    "chma=10px,10px,10px,10px|0,0",
     "cht=gm",
     "chd=t:" + data,
     //    "chdl=" + bar_label,
