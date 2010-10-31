@@ -11,7 +11,7 @@ class TwitterUser extends Tweeter {
         twitterActor !? OAuthResponse(verifier)
 
     def tweetsForName(screenName: String) =
-        twitterActor !? Tweets(screenName)
+        twitterActor !? TwitteruserInfo(screenName)
 
     def topicInfluencersSearch(search: String) =
         twitterActor !? InfluencersSearch(search)
