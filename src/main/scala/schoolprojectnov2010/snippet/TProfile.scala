@@ -86,7 +86,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
 
         case _ => val tprofileTuple = tprofile.asInstanceOf[Tuple2[Option[String], String]] // casting List of Any toTuple2 of Option of string and string
         bind("p", xhtml, // bind helper returns xml node sequence
-          "error" -> <p> <span> <em> "The twitter username "+{tprofileTuple._2}+ " may not have been processed before now by klout !!"</em> </span> </p>, // returns twitter user screen name appedded to a message string 
+          "error" -> <p> <span> <em> The twitter username {tprofileTuple._2} may not have been processed before now by klout.</em> </span> </p>, // returns twitter user screen name appedded to a message string 
           "name" -> "", // returns an Empty String
           "description" -> "", // returns an Empty String
           "screen_name" -> "", // returns an Empty String
