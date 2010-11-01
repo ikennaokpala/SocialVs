@@ -58,7 +58,7 @@ class SearchSnippet {     // class   SearchSnippet
           "title" -> title,  // title
           "graphTitle" -> "Graphical representation of the top influencers on topic: ", // message string
           "topic" -> topic, // topic
-          "instruction" -> "To view volume and/or Influence rating.login with your twitter account.", // message string
+          "instruction" -> "To view Influence report.login with your twitter account.", // message string
           "influencerDetails" ->
                   <ul>
                     {influencerDetails}
