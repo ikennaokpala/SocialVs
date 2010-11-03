@@ -54,7 +54,14 @@ p, ul, ol {
 p h1 {
     color: red;
     text-transform: none;
-    margin-bottom: -100px;
+    margin-bottom: 10px;
+}
+
+p span em {
+    color: red;
+    text-transform: none;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 ul, ol {
@@ -64,8 +71,8 @@ blockquote {
 }
 
 img {
-    margin: 0px, 0px, 0px, 0px;
-    padding: 0px, 0px, 0px, 0px;
+    /*margin: 0px, 0px, 0px, 0px;
+    padding: 0px, 0px, 0px, 0px;*/
 }
 
 a {
@@ -364,9 +371,37 @@ span {
 
 }
 
+#percentile {
+    width: 100px;
+    margin-left: 70px;
+    top: 40px; /*overflow: hidden;*/
+    position: relative;
+    z-index: 1;
+}
+
+#percentile em {
+    color: #b1b1b1;
+    display: block;
+    font: bold 13px Arial
+}
+
+#percentile .score {
+    float: left;
+    font: bold 50px/40px Arial;
+    margin: 0 18px 0 0;
+    text-align: center
+}
+
+#percentile .score span {
+    font: bold 10px Arial;
+    margin: 0 18px 0 0;
+}
+
 #graph {
     width: auto; /*margin-left: 200px;*/
-    overflow: hidden;
+/*overflow: hidden;*/
+    position: relative;
+    z-index: 2;
 }
 
 #graph img {
@@ -470,7 +505,7 @@ span {
     display: block;
     width: 120px;
     height: 18px;
-    < p id = "kclass" > < h3 > Klout Classification: < / h margin: 0px;
+    margin: 0px;
     padding: 3px 0px 0px 40px;
     background: #546E09;
     text-decoration: none;

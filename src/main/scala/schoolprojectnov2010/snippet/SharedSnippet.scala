@@ -32,7 +32,7 @@ class SharedSnippet extends ApplicationUser { // SharedSnippet extends Applicati
                     JsIf(JsEq(ValById("search"), ""), Alert("You are expected to provide a topic or keyword") & JsReturn(false)))) // submit button with javascript validation
     }
 
-    def smallSearchBox(xhtml: NodeSeq): NodeSeq = {   // render method definition
+    def twitterUserSearchBox(xhtml: NodeSeq): NodeSeq = {   // render method definition
         bind("ss", xhtml,
             "search" -> text(search, search = _, "id" -> "smallbox"), // search text field
             "submit" -> submit(S.?("Go"), () => S.redirectTo("/" + search), "id" -> "smallboxbtn", "onclick" ->

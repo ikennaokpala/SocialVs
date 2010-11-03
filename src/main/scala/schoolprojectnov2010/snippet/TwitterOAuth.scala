@@ -12,28 +12,28 @@ package schoolprojectnov2010.snippet
 import net.liftweb.http._
 
 class TwitterOAuth extends ApplicationUser {
-  import scala.xml.NodeSeq   // library import into local class scope
+  import scala.xml.NodeSeq // library import into local class scope
   import SHtml._
   import js._
   import JsCmds.{Noop, RedirectTo}
 
   def render(xhtml: NodeSeq) = { //defualt page load method 
-  user.authorized match {
-      case true => userLoggedIn  // if user is already logged in, dont show OAuth button
+    user.authorized match {
+      case true => userLoggedIn // if user is already logged in, dont show OAuth button
       case false =>
 
         (for{ // for comprehension
-          tkn <- S.param("oauth_token")   // retrieves the oauth token for the current authentication session
+          tkn <- S.param("oauth_token") // retrieves the oauth token for the current authentication session
           vrfr <- S.param("oauth_verifier") // retrieves the oauth verifier for the current authentication session
         } yield useTokens(tkn, vrfr)) getOrElse <li class="btnimg">
-          {a(() => twitterAuthURL,  // if user isnt logged in, create an anchor tag around a the twitter sign in imagge button which will do an AJAX call and invoke the OAuth URL request and Authentication function
+          {a(() => twitterAuthURL, // if user isnt logged in, create an anchor tag around a the twitter sign in imagge button which will do an AJAX call and invoke the OAuth URL request and Authentication function
               <img src="/classpath/images/twitter/twitter_button_3_lo.gif" alt="Twitter OAuth Button"/>)}
         </li>
     }
   }
 
 
-  def twitterAuthURL: JsCmd = {  //  generate URL for Twitter Auth requests
+  def twitterAuthURL: JsCmd = { //  generate URL for Twitter Auth requests
 
     user.appAuthURL match {
 
@@ -53,19 +53,22 @@ class TwitterOAuth extends ApplicationUser {
 
     user.appVerifyAuth(verifier) match {
 
-      case Some(username: String) =>     // if URL has tokens, then complete OAuth process
+      case Some(username: String) => // if URL has tokens, then complete OAuth process
 
         user.authorized = true
         user.screenName = username
         //        S.redirectTo("/" + username)
-        S.redirectTo("/")  // redirect to home page
-        userLoggedIn   // return node sequence for logged in user
+        S.redirectTo("/") // redirect to home page
+        userLoggedIn // return node sequence for logged in user
 
       case _ => <b>something aint right</b> // return error notification node sequence 
     }
   }
- // return node sequence for logged in user
+  // return node sequence for logged in user
   def userLoggedIn = <span>
+    <li class=" ">
+      <a href="/search/index2">Influence Report</a>
+    </li>
     <li>
       <a href={"/" + user.screenName}>
         {user.screenName}
