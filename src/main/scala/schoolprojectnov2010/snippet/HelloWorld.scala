@@ -1,14 +1,13 @@
-package schoolprojectnov2010 {
-package snippet {
+package schoolprojectnov2010.snippet
 
 import _root_.scala.xml.NodeSeq
-import _root_.net.liftweb.util.Helpers
-import Helpers._
+import _root_.java.util.{Date}
 
-class HelloWorld {
-  def howdy(in: NodeSeq): NodeSeq =
-    Helpers.bind("b", in, "time" -> (new _root_.java.util.Date).toString)
-}
+case class myModel(mydate: Date)
 
+class HelloWorldSnippet {
+val today = myModel(new Date)
+
+  def render(in: NodeSeq): NodeSeq = <span> { today.mydate.toString} </span>
 }
-}
+ 
