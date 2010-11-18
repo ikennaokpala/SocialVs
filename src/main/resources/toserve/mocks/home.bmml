@@ -1,0 +1,46 @@
+<mockup version="1.0" skin="sketch" measuredW="1261" measuredH="577" mockupW="989" mockupH="560">
+  <controls>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="262" y="7" w="989" h="560" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>TOPIC%20SEARCH%20AND%20INFLUENCE%20REPORTING%20TOOL%0Ahttp%3A//localhost%3A8080/</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Canvas" x="271" y="85" w="977" h="133" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::IconLabel" x="271" y="107" w="83" h="-1" measuredW="48" measuredH="71" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>LOGO</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Title" x="369" y="113" w="-1" h="-1" measuredW="189" measuredH="56" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SOCIALVs</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::LinkBar" x="1017" y="124" w="-1" h="-1" measuredW="61" measuredH="23" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Home%2C%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Button" x="1078" y="122" w="-1" h="-1" measuredW="143" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sign%20in%20with%20Twitter</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="478" y="298" w="364" h="-1" measuredW="170" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>search%20for%20top%20influencers</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Button" x="878" y="298" w="-1" h="-1" measuredW="63" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>search</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Canvas" x="271" y="492" w="970" h="44" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Label" x="636" y="500" w="101" h="23" measuredW="88" measuredH="23" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>FOOTER%20AREA</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

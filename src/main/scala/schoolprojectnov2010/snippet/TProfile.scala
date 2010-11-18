@@ -72,7 +72,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
           "profile_picture" -> <img src={TwtUserInfo.profile_image_url.toString} width=' ' height=' '/>, // twitter user's image
           "friends_count" -> TwtUserInfo.friends_count.toString, // twitter user's friends count
           "score" -> round(TwtUserInfo.score.doubleValue).toString, // twitter user's klout score
-          "percentile" -> TwtUserInfo.percentile.toString, // twitter user's percentile score
+         /* "percentile" -> TwtUserInfo.percentile.toString, // twitter user's percentile score*/
           "kclass" -> TwtUserInfo.kclass, // twitter user's kclass score
           "klout_description" -> TwtUserInfo.klout_description, // twitter user's kclass description
           "truereach" -> round(TwtUserInfo.true_reach.doubleValue).toString, // twitter user's true reach
@@ -102,7 +102,7 @@ class TProfile extends ApplicationUser { // TProfile class definition
           "profile_picture" -> "", // returns an Empty String
           "friends_count" -> "", // returns an Empty String
           "score" -> "", // returns an Empty String
-          "percentile" -> "", // returns an Empty String
+          /*"percentile" -> "", // returns an Empty String*/
           "kclass" -> "", // returns an Empty String
           "klout_description" -> "", // returns an Empty String
           "truereach" -> "", // returns an Empty String

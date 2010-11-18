@@ -59,7 +59,7 @@ case class TwitterUserVO(id: BigDecimal, name: String, screenName: String,
                          location: String, profile_image_url: String,
                          score: BigDecimal, true_reach: BigDecimal, kclass: String,
                          klout_description: String, amplification_score: BigDecimal, network_score: BigDecimal,
-                         influencedBy: List[(String, BigDecimal)], percentile: BigDecimal) // Twitter and  Klout user Data Transfer Object
+                         influencedBy: List[(String, BigDecimal)]/*, percentile: BigDecimal*/) // Twitter and  Klout user Data Transfer Object
 
 class ApplicationActor extends LiftActor { // Aplication actor inherit capabilities from Lift'sActor library
   private lazy val http = new Http   //  databinder dispatch Http instance  lazily evaluated
@@ -102,7 +102,7 @@ class ApplicationActor extends LiftActor { // Aplication actor inherit capabilit
           val network_score = ('network_score ! num)(kjson(0))  // Extracting network score with the SymOp network_score
           val kclass = ('kclass ! str)(kjson(0)) // Extracting klout class  with the SymOp kclass
           val klout_description = ('description ! str)(kjson(0)) // Extracting klout class description with the SymOp description
-          val percentile = ('percentile ! num)(kjson(0)) // Extracting klout user percentile  with the SymOp percentile
+          /*val percentile = ('percentile ! num)(kjson(0))*/ // Extracting klout user percentile  with the SymOp percentile
         /*  val twitterUser = http(reqTwitterUserId)  // handling the reqTwitterUserId as JSON,  taking what i want
           val twitterUserId = ('id ! num)(twitterUserObj) // Extracting twitterUserId  with the SymOp kscore
           lazy val reqTc = TwitterCounterCredentials.req <<? Map("apikey" -> TwitterCounterCredentials.key, "twitter_id" -> twitterUserId)// Twitter Counter User request end point Url
@@ -150,7 +150,7 @@ class ApplicationActor extends LiftActor { // Aplication actor inherit capabilit
               description, text, statuses_count, friends_count,
               followers_count, listed_count, favourites_count,
               location, profile_image_url, score, true_reach, kclass, klout_description,
-              amplification_score, network_score, influencedBy, percentile)
+              amplification_score, network_score, influencedBy/*, percentile*/)
           println("Current user\'s id: " + twitterUserObj(0).id)  // yield creates a new list of TwitterUserVO
           twitterUserObj
 
