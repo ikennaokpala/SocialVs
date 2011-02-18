@@ -1,0 +1,1 @@
+Social Vs is done in partial fullfilment for the award of a business information systems degree from University of East London. © 2010. By Ikenna Okpala
